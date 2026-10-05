@@ -118,6 +118,14 @@ Frases de abertura ("Bolo de verdade, feito à mão..."), a história da confeit
 6. **Prazo real** de encomenda (está 48h comum / 5 a 7 dias em datas comemorativas).
 7. **Recheios e itens** que vocês realmente fazem — para o cardápio não prometer o que não existe.
 
+### Como enviar fotos e vídeos
+
+Anexo pelo chat não está chegando ao meu ambiente, e eu não tenho acesso ao seu computador.
+O caminho que funciona: **suba os arquivos no próprio repositório do GitHub**, na pasta
+[`enviados/`](enviados/) — o passo a passo está no arquivo de dentro dela. Pode mandar tudo
+com o nome original do celular (`IMG_1234.jpg`); eu escolho as melhores, renomeio para os nomes
+que o site espera, comprimo e publico.
+
 ### Arquivos que preciso que você mande
 
 | Arquivo | Onde colocar | Observação |
