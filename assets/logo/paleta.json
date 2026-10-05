@@ -1,0 +1,64 @@
+{
+  "_leia_me": "Paleta extraída da logo da Andrade's Bakery. Estes valores alimentam os tokens de CSS em css/style.css. Se você mandar o arquivo original (PNG transparente, SVG, AI ou PDF), eu refaço a leitura pixel a pixel e ajusto aqui automaticamente.",
+  "_situacao": "O arquivo da logo enviado no chat não chegou ao ambiente de trabalho, então as cores abaixo foram lidas visualmente da imagem: preto da letra A, marrom escuro do texto BAKERY, marrom da calda de chocolate e o branco da faixa.",
+
+  "marca": "Andrade's Bakery",
+  "origem": "logo enviada pelo cliente (quadrada, com calda de chocolate escorrendo sobre a letra A)",
+  "atualizado_em": "2026-10-05",
+
+  "cores": {
+    "preto": {
+      "hex": "#0B0A09",
+      "uso": "Letra A da logo · textos de título · fundos escuros",
+      "token_css": "--ink"
+    },
+    "marrom_texto": {
+      "hex": "#5A2E1E",
+      "uso": "Palavra BAKERY da logo · etiquetas e destaques de texto",
+      "token_css": "--marrom"
+    },
+    "chocolate": {
+      "hex": "#7A462A",
+      "uso": "Calda de chocolate da logo · cor principal de destaque, preços e botões secundários",
+      "token_css": "--cocoa"
+    },
+    "chocolate_escuro": {
+      "hex": "#5E3721",
+      "uso": "Sombra da calda · títulos sobre fundo claro",
+      "token_css": "--cocoa-600"
+    },
+    "chocolate_profundo": {
+      "hex": "#2A1810",
+      "uso": "Fundos escuros das seções (datas especiais e encomenda)",
+      "token_css": "--cocoa-900"
+    },
+    "brilho_da_calda": {
+      "hex": "#A9754C",
+      "uso": "Ponto de luz da calda · detalhes, ícones e números",
+      "token_css": "--tan"
+    },
+    "branco": {
+      "hex": "#FFFFFF",
+      "uso": "Faixa da palavra BAKERY · cards e fundos claros",
+      "token_css": "--paper"
+    },
+    "creme": {
+      "hex": "#F7F2EA",
+      "uso": "Fundo geral do site (variação quente do branco)",
+      "token_css": "--cream"
+    }
+  },
+
+  "proporcao_de_uso": {
+    "descricao": "Regra 60/30/10 aplicada ao site",
+    "creme_e_branco": "60% — fundos e respiro",
+    "preto": "30% — tipografia, faixa animada e rodapé",
+    "chocolate_e_marrom": "10% — preços, botões, etiquetas e detalhes"
+  },
+
+  "observacoes": [
+    "A logo não traz verde na paleta: o verde aparece só no botão de WhatsApp, por ser cor reconhecível do aplicativo (aumenta o clique).",
+    "Se você quiser 100% fiel à logo, troque --green pelo marrom --cocoa em css/style.css: o botão fica marrom e perde um pouco de reconhecimento.",
+    "O cinza claro do arquivo original (#E9E9E9) NÃO é cor de marca — era só o fundo da imagem. Não foi usado no site."
+  ]
+}

@@ -26,20 +26,23 @@
    01. TOKENS
    ========================================================================== */
 :root {
-  /* --- Cores da marca: branco, preto e marrom --------------------------- */
-  --ink:        #14100D;   /* quase preto, quente */
-  --ink-soft:   #2A2119;
-  --ink-mute:   #6A5A4A;
-  --paper:      #FFFFFF;   /* branco puro */
-  --cream:      #F8F3EA;   /* branco sujo / fundo quente */
-  --cream-2:    #F1E8DA;
-  --sand:       #E0CDB5;
-  --cocoa-300:  #B08A61;
-  --cocoa:      #7A5230;   /* marrom de trabalho */
-  --cocoa-600:  #5C3A21;
-  --cocoa-900:  #2E1C10;   /* marrom profundo (fundos escuros) */
-  --choco:      #3A2415;
-  --caramel:    #C89052;
+  /* --- Cores da marca: extraídas da logo --------------------------------
+     Preto da letra A · marrom da palavra BAKERY · chocolate da calda ·
+     branco da faixa. A lista completa está em assets/logo/paleta.json       */
+  --ink:        #0B0A09;   /* preto da letra A */
+  --ink-soft:   #241C16;
+  --ink-mute:   #6B5B4D;
+  --paper:      #FFFFFF;   /* branco da faixa "BAKERY" */
+  --cream:      #F7F2EA;   /* branco quente: fundo geral */
+  --cream-2:    #EFE6D8;
+  --sand:       #DFCBB2;
+  --cocoa-300:  #A9754C;   /* ponto de luz da calda */
+  --cocoa:      #7A462A;   /* chocolate da calda — cor principal */
+  --cocoa-600:  #5E3721;   /* sombra da calda */
+  --cocoa-900:  #2A1810;   /* fundos escuros das seções */
+  --marrom:     #5A2E1E;   /* marrom do texto "BAKERY" */
+  --choco:      #3A2114;
+  --tan:        #A9754C;   /* detalhe/textura (antes chamado de caramel) */
   --green:      #1F6F45;   /* CTA WhatsApp */
   --green-dark: #175535;
   --line:       rgba(20, 16, 13, .12);
@@ -124,7 +127,7 @@ h1, h2, h3, h4 {
 h3, h4 { font-variation-settings: 'SOFT' 12, 'WONK' 0; letter-spacing: -.01em; }
 
 p { text-wrap: pretty; }
-::selection { background: var(--caramel); color: var(--ink); }
+::selection { background: var(--tan); color: var(--ink); }
 
 :focus-visible {
   outline: 2px solid var(--cocoa);
@@ -173,7 +176,7 @@ p { text-wrap: pretty; }
   background: currentColor;
   opacity: .55;
 }
-.sec--dark .eyebrow { color: var(--caramel); }
+.sec--dark .eyebrow { color: var(--tan); }
 
 .h-xl { font-size: clamp(2.15rem, 1.2rem + 4.6vw, 4.35rem); }
 .h-l  { font-size: clamp(1.9rem, 1.2rem + 3.1vw, 3.1rem); }
@@ -253,7 +256,7 @@ p { text-wrap: pretty; }
   color: var(--cocoa-600);
 }
 .chip--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.chip--caramel { background: var(--caramel); border-color: var(--caramel); color: var(--ink); }
+.chip--caramel { background: var(--tan); border-color: var(--tan); color: var(--ink); }
 
 /* --- Faixa de destaques (números) ------------------------------------- */
 .stats { display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 4vw, 3.5rem); }
@@ -316,7 +319,7 @@ p { text-wrap: pretty; }
   .aviso { font-size: .7rem; padding-inline: 2.4rem 1.6rem; }
 }
 .aviso a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.aviso a:hover { color: var(--caramel); }
+.aviso a:hover { color: var(--tan); }
 .aviso__x {
   position: absolute; right: .75rem; top: 50%; transform: translateY(-50%);
   width: 22px; height: 22px; border-radius: 50%;
@@ -360,6 +363,10 @@ p { text-wrap: pretty; }
   padding: 3px;
 }
 .marca__logo[hidden] { display: none; }
+.marca__logo--claro {   /* no rodapé escuro: sem o círculo branco, usa a marca em creme */
+  background: transparent;
+  border-color: rgba(248, 243, 234, .18);
+}
 .marca__mono {
   width: 44px; height: 44px;
   border-radius: 50%;
@@ -518,7 +525,7 @@ p { text-wrap: pretty; }
   font-variation-settings: 'SOFT' 60, 'WONK' 1;
   font-weight: 700;
   line-height: .8;
-  color: rgba(122,82,48,.055);
+  color: rgba(122,70,42,.055);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
@@ -611,7 +618,7 @@ p { text-wrap: pretty; }
   line-height: 1.15;
   letter-spacing: -.01em;
 }
-.colagem__selo em { display: block; font-family: var(--f-hand); font-size: 1.05rem; color: var(--caramel); }
+.colagem__selo em { display: block; font-family: var(--f-hand); font-size: 1.05rem; color: var(--tan); }
 .colagem__nota {
   position: absolute;
   left: 46%;
@@ -660,7 +667,7 @@ p { text-wrap: pretty; }
   white-space: nowrap;
   color: rgba(248,243,234,.86);
 }
-.marquee__trilha span::after { content: '✺'; color: var(--caramel); font-size: .8em; }
+.marquee__trilha span::after { content: '✺'; color: var(--tan); font-size: .8em; }
 @keyframes deslizar { to { transform: translateX(-100%); } }
 
 /* ==========================================================================
@@ -751,7 +758,7 @@ p { text-wrap: pretty; }
   place-items: center;
   gap: .6rem;
   background:
-    repeating-linear-gradient(135deg, rgba(122,82,48,.055) 0 2px, transparent 2px 9px),
+    repeating-linear-gradient(135deg, rgba(122,70,42,.055) 0 2px, transparent 2px 9px),
     var(--cream);
 }
 .produto__vazio i {
@@ -976,7 +983,7 @@ p { text-wrap: pretty; }
 .lista-precos li span {
   font-weight: 600;
   font-size: .875rem;
-  color: var(--caramel);
+  color: var(--tan);
   white-space: nowrap;
 }
 .painel__obs {
@@ -1161,7 +1168,7 @@ p { text-wrap: pretty; }
   font-family: var(--f-display);
   font-size: 14rem;
   line-height: 1;
-  color: rgba(122,82,48,.07);
+  color: rgba(122,70,42,.07);
   pointer-events: none;
 }
 .depo__trilha { position: relative; min-height: 12rem; }
@@ -1174,7 +1181,7 @@ p { text-wrap: pretty; }
   transition: opacity .5s var(--ease-soft), transform .6s var(--ease), visibility .5s;
 }
 .depo__item.is-ativo { opacity: 1; visibility: visible; transform: none; position: relative; }
-.estrelas { display: flex; gap: .2rem; color: var(--caramel); margin-bottom: 1.15rem; }
+.estrelas { display: flex; gap: .2rem; color: var(--tan); margin-bottom: 1.15rem; }
 .depo__texto {
   font-family: var(--f-display);
   font-size: clamp(1.2rem, 1rem + 1.5vw, 1.95rem);
@@ -1310,7 +1317,7 @@ p { text-wrap: pretty; }
   font-family: var(--f-display);
   font-size: 1.75rem;
   font-variation-settings: 'SOFT' 40;
-  color: var(--caramel);
+  color: var(--tan);
   margin-bottom: .65rem;
   line-height: 1;
 }
@@ -1422,7 +1429,7 @@ p { text-wrap: pretty; }
 .campo input:focus, .campo select:focus, .campo textarea:focus {
   outline: none;
   border-color: var(--cocoa);
-  box-shadow: 0 0 0 3px rgba(122,82,48,.14);
+  box-shadow: 0 0 0 3px rgba(122,70,42,.14);
 }
 .campo__dica { font-size: .6875rem; color: var(--ink-mute); font-style: italic; }
 .form__acoes { margin-top: 1.35rem; display: grid; gap: .85rem; }
@@ -1431,7 +1438,7 @@ p { text-wrap: pretty; }
   display: none;
   padding: .7rem .9rem;
   border-radius: var(--r-sm);
-  background: #FDECE9;
+  background: #F9E9E4;
   border: 1px solid #F2C3BA;
   color: #8A2C1A;
   font-size: .8125rem;
@@ -1455,7 +1462,7 @@ p { text-wrap: pretty; }
   border-radius: 50%;
   display: grid; place-items: center;
   background: rgba(248,243,234,.1);
-  color: var(--caramel);
+  color: var(--tan);
 }
 .contato__cartao b { display: block; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(248,243,234,.55); font-weight: 600; }
 .contato__cartao strong { display: block; font-family: var(--f-display); font-size: 1.15rem; color: var(--paper); font-weight: 600; margin-top: .3rem; letter-spacing: -.01em; }
@@ -1482,7 +1489,7 @@ p { text-wrap: pretty; }
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--caramel);
+  color: var(--tan);
   margin-bottom: 1rem;
 }
 .rodape ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; font-size: .875rem; }
@@ -1690,7 +1697,7 @@ p { text-wrap: pretty; }
   width: 3rem; height: 3rem;
   border-radius: 50%;
   background: var(--ink);
-  color: var(--caramel);
+  color: var(--tan);
   display: grid; place-items: center;
   font-size: 1.1rem;
   box-shadow: var(--shadow-s);
@@ -1783,7 +1790,7 @@ p { text-wrap: pretty; }
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--caramel);
+  color: var(--tan);
   margin-bottom: .8rem;
 }
 .bairros__lista { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -1807,3 +1814,160 @@ p { text-wrap: pretty; }
 
 /* --- Coluna de novidades no rodapé (5 colunas agora) ------------------- */
 .rodape__lista .btn { margin-top: .1rem; }
+
+
+/* ==========================================================================
+   20. BOLOS DE FESTA (seção da especialidade da casa)
+   ========================================================================== */
+.festa {
+  background:
+    radial-gradient(90% 60% at 92% 4%, rgba(169,117,76,.13), transparent 60%),
+    var(--cream);
+  position: relative;
+}
+.festa__topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.festa__acao { display: grid; gap: .75rem; justify-items: flex-start; }
+.festa__acao .chip[hidden] { display: none; }
+
+.festa__grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+/* Tabela de tamanhos */
+.festa__tabela {
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-lg);
+  padding: clamp(1.35rem, 3vw, 2.15rem);
+  box-shadow: var(--shadow-s);
+}
+.festa__subtitulo {
+  font-size: 1.0625rem;
+  margin-bottom: 1rem;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.lista-precos--clara { margin: 0; }
+.lista-precos--clara li { border-bottom: 1px solid var(--line-soft); padding: .78rem 0; }
+.lista-precos--clara li:last-child { border-bottom: 0; padding-bottom: 0; }
+.lista-precos--clara li b { color: var(--ink); font-weight: 600; }
+.lista-precos--clara li i { border-bottom: 1px dotted var(--line); }
+.lista-precos--clara li span { color: var(--cocoa); font-weight: 700; }
+.lista-precos--clara li small {
+  display: block;
+  margin-top: .15rem;
+  font-size: .75rem;
+  color: var(--ink-mute);
+  font-weight: 400;
+}
+.festa__nota {
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line-soft);
+  font-size: .8125rem;
+  color: var(--ink-mute);
+}
+
+/* Lista numerada do que vem incluso */
+.festa__incluso { list-style: none; margin: 0; padding: 0; counter-reset: incluso; }
+.festa__incluso li {
+  counter-increment: incluso;
+  position: relative;
+  padding: 0 0 1.15rem 3rem;
+}
+.festa__incluso li:last-child { padding-bottom: 0; }
+.festa__incluso li::before {
+  content: '0' counter(incluso);
+  position: absolute;
+  left: 0; top: .1rem;
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--tan);
+  letter-spacing: -.02em;
+}
+.festa__incluso li::after {   /* linha vertical ligando os passos */
+  content: '';
+  position: absolute;
+  left: .22rem; top: 1.5rem; bottom: .2rem;
+  width: 1px;
+  background: var(--line);
+}
+.festa__incluso li:last-child::after { display: none; }
+.festa__incluso b { display: block; font-size: .9375rem; color: var(--ink); font-weight: 600; }
+.festa__incluso span { font-size: .875rem; color: var(--ink-mute); }
+
+/* Galeria dos bolos entregues */
+.festa__galeria {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(.75rem, 2vw, 1.15rem);
+}
+.festa__item {
+  position: relative;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--cream-2);
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-s);
+}
+.festa__item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .8s var(--ease);
+}
+.festa__item:hover img { transform: scale(1.05); }
+.festa__item figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.6rem .95rem .85rem;
+  background: linear-gradient(180deg, transparent, rgba(11,10,9,.82));
+  color: var(--cream);
+  font-size: .8125rem;
+  line-height: 1.3;
+}
+.festa__item figcaption b { display: block; font-family: var(--f-display); font-size: .9375rem; font-weight: 600; }
+.festa__item figcaption span { opacity: .78; font-size: .75rem; }
+
+/* Regras rápidas */
+.festa__regras {
+  list-style: none;
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.festa__regras li {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .85rem;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: .75rem;
+  color: var(--ink-mute);
+}
+.festa__regras li svg { color: var(--cocoa); flex: none; }
+
+@media (max-width: 1000px) {
+  .festa__grade { grid-template-columns: 1fr; }
+  .festa__galeria { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .festa__acao { width: 100%; }
+  .festa__acao .btn { width: 100%; }
+  .festa__galeria { gap: .6rem; }
+  .festa__item figcaption { padding: 1.2rem .7rem .7rem; }
+}

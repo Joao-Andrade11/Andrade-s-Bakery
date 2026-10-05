@@ -69,6 +69,28 @@ Estrutura de e-commerce clara: hero forte, categorias organizadas, várias porta
 
 ---
 
+---
+
+## 1.1. Carlo's Bakery Brasil — a referência que você mandou
+
+[carlosbakery.com.br](https://www.carlosbakery.com.br/) — análise da home (out/2026):
+
+**O que eles fazem:**
+1. **Abertura por autoridade, não por produto.** "A confeitaria mais famosa do mundo" + "Hoboken · Since 1910" + a foto do Buddy Valastro. A venda é a história e a tradição antes de qualquer doce aparecer.
+2. **Dois caminhos separados:** o **cardápio** (cannoli, lobster tail — os "ícones da vitrine", numerados 01, 02…) e os **bolos personalizados**, que têm seção própria com CTA **"Solicitar orçamento"** — não "comprar". Bolo artístico não é produto de prateleira: é projeto, e o funil começa com orçamento.
+3. **Vitrine numerada** (01, 02, 03) com nome e uma descrição de uma linha — parece menu de restaurante, dá sofisticação e orienta o olho.
+4. **WhatsApp flutuante** com mensagem pronta ("Gostaria de mais informações sobre a Carlo's Bakery") — exatamente o modelo que já usamos.
+5. **Deixa o preço fora do bolo personalizado** ("Solicitar orçamento") porque o preço depende de tema, tamanho e estrutura — mas eles têm autoridade de marca para isso.
+
+**O que eu apliquei aqui (adaptado à realidade da Andrade's):**
+- ✅ **Seção própria de "Bolos de festa"**, separada do cardápio do dia a dia, com **"Solicitar orçamento"** como CTA principal — espelhando a divisão cardápio × bolos artísticos do Carlo's.
+- ✅ **Caminho de orçamento como funil principal**: botão da abertura, seção da especialidade, abas de datas e formulário — todos terminam em mensagem pronta no WhatsApp.
+- ✅ **Vitrine numerada**: a lista do que vem incluso em todo bolo é numerada (01 a 05), e a galeria de bolos entregues substitui a "vitrine" deles.
+- ✅ **Autoridade sem arrogância**: em vez de "a mais famosa do mundo", usamos provas que a Andrade's pode sustentar — esboço antes de produzir, entrega refrigerada em SG e Niterói, receita de família.
+- ⚠️ **Divergência consciente:** o Carlo's não mostra preço no personalizado. Aqui mostrei **"a partir de R$"** por faixa de tamanho, porque a pesquisa de conversão (Peak Digital) mostra que esconder preço espanta quem não é cliente de marca famosa — e a Andrade's está construindo essa marca agora. Quando o volume de pedidos permitir, dá para migrar para "sob orçamento" nos temas complexos.
+
+---
+
 ## 2. Referências brasileiras (onde o jogo é WhatsApp)
 
 No Brasil, confeitaria se vende por encomenda e o WhatsApp é o caixa. As referências mudam de forma:
@@ -94,7 +116,7 @@ No Brasil, confeitaria se vende por encomenda e o WhatsApp é o caixa. As refer�
 | Botão de pedido precisa aparecer em até 3 segundos | guias de conversão para padarias | Dois botões de WhatsApp na primeira dobra |
 | Cada 1s de atraso pode custar até 7% de conversão | DB Managers (2026) | Site sem framework, sem CDN, **~2,8 MB no total**, zero requisição externa |
 | 87% leem avaliações antes de decidir | BrightLocal, citado em Callin | Carrossel de feedbacks com nome e ocasião |
-| 93% usam busca online para achar negócio local | BrightLocal, citado em Callin | Dados estruturados `Bakery`, títulos e descrição com "Itaboraí/RJ" |
+| 93% usam busca online para achar negócio local | BrightLocal, citado em Callin | Dados estruturados `Bakery`, títulos e descrição com "São Gonçalo e Niterói" |
 | **Não esconder preço** atrás de "sob consulta" | guia Peak Digital (2026) | Preço em todos os itens; quando é variável, "a partir de R$ X" |
 | **Evitar carrossel no hero** (prejudica conversão e Core Web Vitals) | guia Peak Digital | Hero estático com uma foto forte |
 | **Status aberto/fechado no cabeçalho fixo** aumenta visita à loja | guia Peak Digital | Selo **"Aberto agora · fecha às 19h"** calculado em tempo real |
@@ -107,7 +129,7 @@ No Brasil, confeitaria se vende por encomenda e o WhatsApp é o caixa. As refer�
 ## 4. Roadmap por ordem de retorno (minha recomendação)
 
 1. **Fotos reais + Google Business Profile.** É o que mais move a agulha: sem foto real não há confiança,
-   e sem ficha no Google você não aparece na busca de "confeitaria em Itaboraí".
+   e sem ficha no Google você não aparece na busca de "bolo de aniversário em São Gonçalo".
 2. **Depoimentos verdadeiros** (com print). Feedbacks inventados são risco de credibilidade — os atuais
    são de exemplo e devem sair antes de divulgar o site.
 3. **Portfólio de bolos temáticos**, como fazem as casas de bolo de festa: 8 a 12 fotos de trabalhos
@@ -120,7 +142,7 @@ No Brasil, confeitaria se vende por encomenda e o WhatsApp é o caixa. As refer�
 6. **Vídeos curtos** (10–20s) das fornadas — o site já está pronto para receber; falta só o arquivo.
 7. **Programa de fidelidade / lista de transmissão** — o botão "Entrar na lista" já está no rodapé;
    a ideia é usar a lista para avisar das fornadas e datas comemorativas.
-8. **Página por ocasião com SEO local** ("bolo de aniversário em Itaboraí", "ovo de Páscoa em Itaboraí"),
+8. **Página por ocasião com SEO local** ("bolo de aniversário em São Gonçalo", "bolo em Niterói"),
    espelhando a navegação por ocasião da Bobbette & Belle.
 9. **Marketplace (opcional).** Se um dia quiser vender com pagamento online, dá para plugar um checkout
    (Mercado Pago/Stripe) nesta mesma base — sem refazer o site.
@@ -139,7 +161,8 @@ No Brasil, confeitaria se vende por encomenda e o WhatsApp é o caixa. As refer�
   [Qrolic](https://qrolic.com/blog/bakery-website-essential-features/) ·
   [Baking Subs](https://www.bakingsubs.com/blog/best-website-builder-for-home-bakery-business) ·
   [Wix — bakery sites](https://www.wix.com/blog/how-to-make-a-bakery-website)
-- Brasil: [Confeitaria Delícia](https://confeitariadelicia.com.br/) ·
+- Brasil: [Carlo's Bakery Brasil](https://www.carlosbakery.com.br/) ·
+  [Confeitaria Delícia](https://confeitariadelicia.com.br/) ·
   [Confeitaria Dama](https://confeitariadama.com.br/) ·
   [Confeitar.app](https://confeitar.app/) · [Meslo](https://meslo.com.br/cardapio-interativo-confeitaria/) ·
   [Confeita](https://appconfeita.com/) · [Cardapiando](https://www.cardapiando.com/)

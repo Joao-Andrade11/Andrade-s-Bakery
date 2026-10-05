@@ -156,6 +156,15 @@
     var ent = $('#contatoEntrega');
     if (ent) ent.textContent = CFG.entrega || '';
 
+    var entDet = $('#contatoEntregaDetalhe');
+    if (entDet) {
+      entDet.textContent = CFG.entregaDetalhe ||
+        'Taxa de entrega combinada no WhatsApp conforme o endereço.';
+    }
+
+    var sinalEl = $('#contatoSinal');
+    if (sinalEl && CFG.sinal) sinalEl.textContent = CFG.sinal;
+
     var pag = $('#contatoPagamento');
     if (pag && CFG.pagamentos) pag.textContent = CFG.pagamentos.join(' · ');
 
@@ -165,7 +174,8 @@
     // Faixa animada
     var itens = [
       'Bolos por encomenda', 'Doces finos', 'Salgados assados', 'Pão de queijo mineiro',
-      'Kits café da manhã', 'Bolos temáticos', 'Brigadeiro gourmet', 'Entrega em ' + (CFG.cidade || 'nossa cidade')
+      'Bolos de festa personalizados', 'Bolos temáticos de aniversário', 'Kit festa completo',
+      'Doces finos para mesa', 'Salgados assados', 'Entrega em ' + (CFG.areasAtendidas || [CFG.cidade || 'nossa cidade']).join(' e ')
     ];
     var trilhaHTML = itens.map(function (i) { return '<span>' + i + '</span>'; }).join('');
     ['#marqueeTrilha', '#marqueeTrilha2'].forEach(function (s) {
@@ -534,7 +544,7 @@
     function alternarCamposBolo() {
       if (!campoTipo || !camposBolo) return;
       var texto = (campoTipo.value || '').toLowerCase();
-      camposBolo.hidden = !/bolo|anivers|páscoa|pascoa|namorados|mães|maes|torta/.test(texto);
+      camposBolo.hidden = !/bolo|anivers|páscoa|pascoa|namorados|mães|maes|torta|kit festa/.test(texto);
     }
     if (campoTipo) {
       campoTipo.addEventListener('change', alternarCamposBolo);
@@ -560,6 +570,7 @@
         sabor:  ($('#f-sabor') || {}).value || '',
         obs:    ($('#f-obs') || {}).value || '',
         restricao: ($('#f-restricao') || {}).value || '',
+        tamanho: ($('#f-tamanho') || {}).value || '',
         massa:  ($('#f-massa') || {}).value || '',
         recheio: ($('#f-recheio') || {}).value || '',
         escrita: ($('#f-escrita') || {}).value || ''
@@ -598,6 +609,7 @@
 
       // Detalhes que só fazem sentido para bolo (e não vêm preenchidos por padrão)
       if (camposBolo && !camposBolo.hidden) {
+        if (d.tamanho && d.tamanho.indexOf('Ainda não sei') !== 0) linhas.push('*Tamanho:* ' + d.tamanho);
         if (d.massa && d.massa !== 'Escolher depois')   linhas.push('*Massa:* ' + d.massa);
         if (d.recheio && d.recheio !== 'Escolher depois') linhas.push('*Recheio:* ' + d.recheio);
         if (d.escrita.trim()) linhas.push('*Mensagem no bolo:* ' + d.escrita.trim());
@@ -838,6 +850,67 @@
   }
 
   /* ======================================================================
+     BOLOS DE FESTA  (js/menu-data.js → `bolosDeFesta`)
+     ====================================================================== */
+  function renderBolosDeFesta() {
+    var f = DADOS.bolosDeFesta;
+    var sec = $('#bolos-de-festa');
+    if (!sec || !f) { if (sec) sec.hidden = true; return; }
+
+    // Cabeçalho da seção
+    var eb = $('#festaEyebrow');  if (eb && f.eyebrow) eb.textContent = f.eyebrow;
+    var ti = $('#festaTitulo');   if (ti && f.titulo)  ti.textContent  = f.titulo;
+    var ch = $('#festaChamada');  if (ch && f.chamada) ch.textContent  = f.chamada;
+
+    // Botão de orçamento (leva a mensagem padrão do config, se existir)
+    var botao = $('#festaOrcamento');
+    if (botao) {
+      botao.setAttribute('href', linkWhatsApp(f.msg));
+      botao.setAttribute('target', '_blank');
+      botao.setAttribute('rel', 'noopener');
+    }
+
+    var et = $('#festaEtiqueta');
+    if (et && f.etiquetaMarca) { et.textContent = f.etiquetaMarca; et.hidden = false; }
+
+    // Tabela de tamanhos por número de convidados
+    var tamanhos = $('#festaTamanhos');
+    if (tamanhos && f.tamanhos) {
+      tamanhos.innerHTML = f.tamanhos.map(function (t) {
+        return '<li><b>' + t.aro + '<small>' + t.fatias + '</small></b><i></i><span>' + t.preco + '</span></li>';
+      }).join('');
+    }
+
+    // O que vem incluso (lista numerada)
+    var incluso = $('#festaIncluso');
+    if (incluso && f.incluso) {
+      incluso.innerHTML = f.incluso.map(function (i) {
+        return '<li><b>' + i.titulo + '</b><span>' + i.texto + '</span></li>';
+      }).join('');
+    }
+
+    // Galeria de bolos entregues
+    var galeria = $('#festaGaleria');
+    if (galeria && f.galeria) {
+      galeria.innerHTML = f.galeria.map(function (g) {
+        return '<figure class="festa__item" data-fallback="foto do bolo">' +
+                 imgTag(g.img, g.titulo + ' — ' + (g.detalhe || '')) +
+                 '<figcaption><b>' + g.titulo + '</b>' + (g.detalhe ? '<span>' + g.detalhe + '</span>' : '') + '</figcaption>' +
+               '</figure>';
+      }).join('');
+      $$('img', galeria).forEach(comFallbackDeImagem);
+    }
+
+    // Regras rápidas
+    var regras = $('#festaRegras');
+    if (regras && f.regras) {
+      regras.innerHTML = f.regras.map(function (r) {
+        return '<li><svg width="13" height="13" aria-hidden="true"><use href="#i-clock"/></svg>' + r + '</li>';
+      }).join('');
+    }
+  }
+
+  /* ======================================================================
      VITRINE DO INSTAGRAM  (js/menu-data.js → `instagram`)
      ====================================================================== */
   function renderInstagram() {
@@ -900,6 +973,7 @@
     renderOutros();
     renderSazonais();
     renderVideos();
+    renderBolosDeFesta();
     renderDestaque();
     renderInstagram();
     renderBairros();

@@ -2,27 +2,50 @@
    ANDRADE'S BAKERY — CONFIGURAÇÃO RÁPIDA
    --------------------------------------------------------------------------
    É aqui que você muda telefone, Instagram, endereço, horários e bairros.
-   Tudo o que está marcado com  // >>> CONFIRMAR  precisa da sua confirmação.
-   Depois de editar, salve o arquivo e recarregue o site.
+   Tudo marcado com  // >>> CONFIRMAR  precisa da sua confirmação.
+   Paleta das cores: assets/logo/paleta.json (lida da sua logo).
    ========================================================================== */
 
 window.ANDRADES = {
   /* ---- Marca ---------------------------------------------------------- */
   nome: "Andrade's Bakery",
-  assinatura: 'Confeitaria artesanal',
-  cidade: 'Itaboraí',        // >>> CONFIRMAR
+  assinatura: 'Bolos de festa artesanais',
+  cidade: 'São Gonçalo',
   uf: 'RJ',
   slogan: 'Feito à mão, com o tempo que o doce pede.',
+
+  /* ---- Especialidade da casa ------------------------------------------
+     É o que aparece na abertura, no formulário e nas perguntas frequentes.
+     Hoje: bolos de festa para aniversário.
+     --------------------------------------------------------------------- */
+  especialidade: 'bolos de festa para aniversário',
+
+  /* ---- Onde atendemos -------------------------------------------------
+     >>> CONFIRMAR os bairros abaixo (coloquei os mais conhecidos de cada
+     cidade como ponto de partida). Deixe a lista vazia ([]) para o site
+     mostrar só "São Gonçalo e Niterói".
+     --------------------------------------------------------------------- */
+  areasAtendidas: ['São Gonçalo', 'Niterói'],
+  bairros: [
+    'Centro · SG', 'Alcântara', 'Neves', 'Colubandê', 'Trindade', 'Mutuá',
+    'Zé Garoto', 'Icaraí · Niterói', 'Centro · Niterói', 'São Francisco · Niterói'
+  ],
+  entrega: 'São Gonçalo e Niterói',
+  entregaDetalhe: 'Entregamos em São Gonçalo e Niterói. Retirada no local combinada no WhatsApp.',
+  pagamentos: ['Pix', 'Dinheiro', 'Cartão de débito', 'Cartão de crédito'],
+  // >>> CONFIRMAR: pedimos sinal para reservar a data de bolos de festa?
+  sinal: 'Sinal de 50% para reservar a data do bolo de festa (o restante na entrega).',
 
   /* ---- WhatsApp (formato internacional, só números) -------------------- */
   whatsapp: {
     numero: '5521990726282',          // +55 21 99072-6282
     exibicao: '(21) 99072-6282',
     mensagemPadrao:
-      'Olá! Vim pelo site da Andrade\'s Bakery e gostaria de informações sobre encomendas. 🍰',
-    // Mensagem do botão "entrar na lista de novidades" (rodapé)
+      'Olá! Vim pelo site da Andrade\'s Bakery e queria um orçamento de bolo de festa. 🎂',
     mensagemLista:
-      'Olá! Quero entrar na lista e receber os sabores do dia e as novidades da Andrade\'s Bakery.'
+      'Olá! Quero entrar na lista e receber os sabores do dia e as novidades da Andrade\'s Bakery.',
+    mensagemOrcamento:
+      'Olá! Quero um orçamento de bolo de festa. Tema: ____ · Data: ____ · Quantos convidados: ____ · Cidade: São Gonçalo/Niterói'
   },
 
   /* ---- Redes sociais --------------------------------------------------- */
@@ -33,52 +56,46 @@ window.ANDRADES = {
 
   /* ---- Status "aberto agora" ------------------------------------------
      dias: 0 = domingo, 1 = segunda ... 6 = sábado
-     abre / fecha: em horas decimais (9 = 9h · 19.5 = 19h30 · null = fechado)
-     Pode ter mais de uma faixa no mesmo dia (ex.: manhã e tarde).
+     abre / fecha: horas decimais (9 = 9h · 19.5 = 19h30 · null = fechado)
+     >>> CONFIRMAR os horários reais.
      --------------------------------------------------------------------- */
   funcionamento: [
     { rotulo: 'Segunda a sexta', dias: [1, 2, 3, 4, 5], abre: 9,  fecha: 19 },
     { rotulo: 'Sábado',          dias: [6],             abre: 9,  fecha: 17 },
     { rotulo: 'Domingo',         dias: [0],             abre: null, fecha: null }
   ],
-  // Mostrado no rodapé do menu do celular e no cartão de horários
   atendimentoFrase: 'Atendemos de seg a sáb, no horário de funcionamento.',
 
-  /* ---- Entrega --------------------------------------------------------- */
-  // >>> CONFIRMAR: bairros/cidades que você realmente atende.
-  // Deixe a lista vazia ([]) para o site mostrar só "Itaboraí e região".
-  bairros: ['Centro', 'Manilha', 'Venda das Pedras', 'Porto das Caixas', 'Itambi', 'Sambaetiba'],
-  entrega: 'Itaboraí e região',
-  pagamentos: ['Pix', 'Dinheiro', 'Cartão de débito', 'Cartão de crédito'],
-
   /* ---- Endereço --------------------------------------------------------
-     >>> CONFIRMAR: se o atendimento for só por encomenda (sem loja física),
+     >>> CONFIRMAR: se o atendimento for só por encomenda, sem loja física,
      deixe "somenteEncomenda: true" e o endereço não aparece no site.
      --------------------------------------------------------------------- */
   endereco: {
     somenteEncomenda: true,
-    rua: 'Rua Exemplo, 000 — Centro',
+    rua: 'Rua Exemplo, 000',
     complemento: '',
-    cidade: 'Itaboraí — RJ',
+    cidade: 'São Gonçalo — RJ',
     cep: '00000-000',
     mapaUrl: ''
   },
 
-  /* ---- Regras comerciais (aparecem nos avisos e no FAQ) ---------------- */
+  /* ---- Regras comerciais ---------------------------------------------- */
   prazo: {
-    comum: '48 horas',
-    dataComemorativa: '5 a 7 dias'
+    comum: '48 horas para bolos simples e doces',
+    dataComemorativa: '5 a 7 dias para bolos de festa e datas comemorativas',
+    // Bolos temáticos complexos (personagem, escultura, dois andares)
+    tematico: '1 mês de antecedência'
   },
 
   /* ---- Recado fixo no topo do site ------------------------------------- */
   avisoTopo:
-    'Encomendas para datas comemorativas com 5 a 7 dias de antecedência ✺ Atendimento pelo WhatsApp',
+    'Bolos de festa para São Gonçalo e Niterói 🎂 Orçamento pelo WhatsApp — datas de fim de semana fecham com antecedência',
 
   /* ---- SEO / compartilhamento ----------------------------------------- */
   seo: {
-    titulo: "Andrade's Bakery — Bolos e doces artesanais em Itaboraí/RJ",
+    titulo: "Andrade's Bakery — Bolos de festa e doces artesanais em São Gonçalo e Niterói",
     descricao:
-      "Confeitaria artesanal em Itaboraí/RJ. Bolos, doces finos, salgados assados e encomendas personalizadas para aniversários, Páscoa, Dia das Mães e Dia dos Namorados. Peça pelo WhatsApp.",
+      "Confeitaria artesanal especializada em bolos de festa para aniversário em São Gonçalo e Niterói. Bolos temáticos personalizados, doces finos, salgados assados e kits. Produção por encomenda — orçamento pelo WhatsApp.",
     imagem: 'assets/img/og-andrades.jpg',
     site: 'https://andradesbakery.com.br' // >>> CONFIRMAR domínio final
   }
