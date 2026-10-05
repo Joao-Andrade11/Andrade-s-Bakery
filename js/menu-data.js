@@ -7,6 +7,9 @@
    COMO EDITAR:
    • Cada item do cardápio é um bloco { } dentro da lista `produtos`.
    • `preco` aceita texto livre ("R$ 89,90" ou "a partir de R$ 189,90").
+     ATENÇÃO: o site está com mostrarPrecos: false (js/config.js) — os valores
+     abaixo NÃO aparecem; no lugar deles o site mostra "sob orçamento". Os dados
+     ficam cadastrados para o dia em que o cliente quiser exibi-los.
    • `img: null` faz o card aparecer com um marcador desenhado no lugar da foto
      (é o caso dos itens que ainda não foram fotografados — fica bonito e
      deixa claro que a foto está por vir).
@@ -296,7 +299,6 @@ window.CARDAPIO = {
     { nome: 'Frutas vermelhas com chantilly', preco: 'sob consulta' },
     { nome: 'Naked cake', preco: 'sob consulta' },
     { nome: 'Torta de limão', preco: 'sob consulta' },
-    { nome: 'Massa amanteigada (para andar)', preco: 'sob consulta' },
     { nome: 'Bolo sem lactose ou sem glúten', preco: 'sob consulta' }
   ],
 

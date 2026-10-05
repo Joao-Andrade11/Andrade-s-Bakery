@@ -789,6 +789,16 @@
       alvos.forEach(function (a) { a.classList.add('is-in'); });
       return;
     }
+    // 1) O que já está na tela no primeiro instante aparece na hora. Sem isso, o
+    //    topo do site pode ficar invisível até a primeira rolagem em alguns
+    //    navegadores (webviews de Instagram/Facebook, navegadores antigos).
+    var vh = window.innerHeight || window.document.documentElement.clientHeight || 800;
+    alvos.forEach(function (a) {
+      var r = a.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh * .92) a.classList.add('is-in');
+    });
+
+    // 2) O resto entra conforme a rolagem
     var obs = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (en) {
         if (en.isIntersecting) {
@@ -797,7 +807,15 @@
         }
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
-    alvos.forEach(function (a) { obs.observe(a); });
+    alvos.forEach(function (a) { if (!a.classList.contains('is-in')) obs.observe(a); });
+
+    // 3) Rede de segurança: se o observador não disparar (navegador que bloqueia
+    //    a API ou erro de renderização), mostra o site inteiro em 1,2 s.
+    setTimeout(function () {
+      var algum = false;
+      alvos.forEach(function (a) { if (a.classList.contains('is-in')) algum = true; });
+      if (!algum) alvos.forEach(function (a) { a.classList.add('is-in'); });
+    }, 1200);
   }
 
   /* ======================================================================
