@@ -2,7 +2,20 @@
 
 Coloque os arquivos nas pastas abaixo — eu já estou com a estrutura pronta e vou encaixar tudo no site.
 
-## 1) Logo → me envie pelo chat
+## 1) Logo oficial → pasta `assets/logo/`
+
+O site **troca sozinho** assim que os arquivos aparecerem na pasta:
+
+| Nome do arquivo | Onde ele entra |
+|---|---|
+| `logo-andrades.png` | Cabeçalho do site (PNG com fundo transparente) |
+| `logo-andrades-claro.png` | Rodapé (fundo escuro) — a mesma logo em versão clara |
+| `logo-andrades-icone.png` | Ícone quando alguém salva o site na tela do celular |
+
+Se mandar só uma versão, mando eu mesmo a segunda. Pode subir em `assets/logo/` pela mesma tela do
+GitHub que você usou para as fotos (ou deixar na pasta `enviados/` que eu movo).
+
+## 1.1) Logo — referência (como estava antes)
 Hoje o site usa uma **marca provisória desenhada a partir da sua logo** — a letra A com a calda de
 chocolate escorrendo (`assets/logo/logo-andrades.svg`, com a versão clara em `logo-andrades-claro.svg`
 para o rodapé). Ela já foi montada com as cores exatas da sua logo: preto `#0B0A09`, chocolate `#7A462A`
@@ -21,7 +34,7 @@ As cores estão documentadas em [`logo/paleta.json`](logo/paleta.json).
 > As fotos continuam guardadas em [`../enviados/`](../enviados/) — pode mandar mais a qualquer momento.
 >
 > **Ainda faltam:** fotos das campanhas de **Páscoa, Dia das Mães e Dia dos Namorados**, fotos de
-> **doces, salgados, pão de queijo e kits**, e um **bolo de dois andares**. Esses espaços hoje
+> **doces, salgados, pão de queijo e kits**. Esses espaços hoje
 > aparecem com um marcador desenhado no site ("foto a caminho") — não usamos imagem gerada como se
 > fosse produto seu.
 (Estamos em **São Gonçalo, atendendo SG e Niterói** — se tiver foto de bolo entregue nessas cidades, marca o bairro que eu uso na legenda.)
@@ -29,7 +42,7 @@ Quanto mais, melhor. Eu recorto e otimizo cada uma. As que mais importam:
 
 | Prioridade | O que | Quantidade |
 |---|---|---|
-| 🔴 **Máxima** | **Bolos de festa entregues** (temáticos, com topo, dois andares) — é a nossa especialidade e o que vende mais | **10–15** |
+| 🔴 **Máxima** | **Bolos de festa entregues** (temáticos e personalizados) — é a nossa especialidade e o que vende mais | **10–15** |
 | 🔴 Alta | Bolos do dia a dia (inteiros e fatias) | 4–8 |
 | 🔴 Alta | Doces / sobremesas (brigadeiro, pudim, chocoflan…) | 4–8 |
 | 🔴 Alta | Salgados, pães, café da manhã | 4–6 |
@@ -108,6 +121,10 @@ o reel em outra aba, sem precisar baixar nada.
 - Se preferir, me mande o **link dos reels do Instagram** que eu embuto direto (não precisa baixar)
 
 ## 4) Depoimentos (feedbacks)
+
+> ✅ **Como mandar:** escreva direto **no chat** (o texto chega sem problema) ou suba **prints** das
+> conversas na pasta [`../enviados/`](../enviados/). O que eu preciso: o que a pessoa falou + primeiro
+> nome + a ocasião (ex.: "bolo de aniversário, Niterói"). Eu corto, ajusto e coloco no carrossel.
 - **Prints das conversas** do WhatsApp com clientes autorizando, ou avaliações do Google/Instagram
 - Ou escreva aqui no chat o que cada cliente falou + nome (posso editar/encurtar)
 
