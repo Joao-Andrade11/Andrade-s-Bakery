@@ -1911,7 +1911,7 @@ p { text-wrap: pretty; }
 .festa__galeria {
   margin-top: clamp(2rem, 4vw, 3rem);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(.75rem, 2vw, 1.15rem);
 }
 .festa__item {
@@ -1964,6 +1964,7 @@ p { text-wrap: pretty; }
 @media (max-width: 1000px) {
   .festa__grade { grid-template-columns: 1fr; }
   .festa__galeria { grid-template-columns: repeat(2, 1fr); }
+  .festa__item { aspect-ratio: 1 / 1; }   /* em duas colunas, quadradas ficam melhores */
 }
 @media (max-width: 520px) {
   .festa__acao { width: 100%; }

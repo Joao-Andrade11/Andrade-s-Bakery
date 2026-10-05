@@ -16,6 +16,14 @@ Eu coloco no lugar em todos os pontos: cabeçalho, rodapé, ícone do celular e 
 As cores estão documentadas em [`logo/paleta.json`](logo/paleta.json).
 
 ## 2) Fotos dos produtos → `assets/img/`
+
+> ✅ **Recebidas em 05/10/2026:** 8 fotos de bolos + 5 vídeos, já aplicados no site.
+> As fotos continuam guardadas em [`../enviados/`](../enviados/) — pode mandar mais a qualquer momento.
+>
+> **Ainda faltam:** fotos das campanhas de **Páscoa, Dia das Mães e Dia dos Namorados**, fotos de
+> **doces, salgados, pão de queijo e kits**, e um **bolo de dois andares**. Esses espaços hoje
+> aparecem com um marcador desenhado no site ("foto a caminho") — não usamos imagem gerada como se
+> fosse produto seu.
 (Estamos em **São Gonçalo, atendendo SG e Niterói** — se tiver foto de bolo entregue nessas cidades, marca o bairro que eu uso na legenda.)
 Quanto mais, melhor. Eu recorto e otimizo cada uma. As que mais importam:
 

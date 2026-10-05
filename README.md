@@ -126,12 +126,34 @@ O caminho que funciona: **suba os arquivos no próprio repositório do GitHub**,
 com o nome original do celular (`IMG_1234.jpg`); eu escolho as melhores, renomeio para os nomes
 que o site espera, comprimo e publico.
 
+### Fotos e vídeos — recebidos e aplicados (05/10/2026)
+
+O cliente enviou **8 fotos** e **5 vídeos** dos bolos pela pasta [`enviados/`](enviados/) do repositório.
+Todos foram tratados (recorte, luz, compressão JPEG + WebP) e entraram no site:
+
+| Foto enviada | Onde entrou |
+|---|---|
+| Bolo de corações com laço | Abertura do site e card "Bolo de Festa com Laço" |
+| Bolo de flores rosas (lateral) | Foto redonda da abertura e galeria de bolos de festa |
+| Bolo de flores rosas (topo) | Card "Bolo com Coroa de Flores" |
+| Bolo corações (topo) | Seção "Sobre" e imagem de compartilhamento |
+| Bolo trufado Ferrero | Card "Bolo Trufado Ferrero" |
+| Bolo bicolor | Card "Bolo Bicolor de Corte" |
+| Bolo "Tchau Tetê" (personalizado) | Destaque do mês, card "Bolo Personalizado" e aba Aniversários |
+
+**Vídeos:** 4 vídeos entraram na seção de vídeos, tocando no próprio site (comprimidos de ~2,5 MB
+para ~0,5 MB cada, com capa gerada automaticamente): bolo personalizado, trufado Ferrero, bicolor
+e bolo de flores. O quinto vídeo enviado ficou de reserva em `enviados/`.
+
 ### Arquivos que preciso que você mande
 
 | Arquivo | Onde colocar | Observação |
 |---|---|---|
+| Fotos das campanhas | `assets/img/sazonal-pascoa.jpg`, `sazonal-maes.jpg`, `sazonal-namorados.jpg` | As 3 abas sazonais estão com marcador desenhado ("foto da campanha") até você mandar — optei por **não usar imagem gerada como se fosse produto seu** |
+| Fotos de doces, salgados e kits | `assets/img/doces-finos.jpg`, `brigadeiros.jpg`, `pudim.jpg`, `salgados-assados.jpg`, `pao-de-queijo.jpg`, `kit-cafe-manha.jpg` | Hoje esses itens aparecem com marcador "foto a caminho" — é só mandar que eu encaixo |
+| Foto de bolo de dois andares | qualquer nome | O card existe, sem foto |
 | Logo oficial | me mande o arquivo (**PNG transparente**, SVG, AI, PDF ou CDR) | Hoje o site usa uma marca provisória desenhada a partir da sua logo: a letra A com a calda de chocolate. Assim que você enviar o arquivo, eu coloco a sua no lugar em todos os pontos (cabeçalho, rodapé, ícone do celular e compartilhamento) |
-| Fotos de produto | `assets/img/` | nomes já usados: `bolo-chocolate.jpg`, `bolo-ninho-morango.jpg`, `bolo-cenoura.jpg`, `bolo-red-velvet.jpg`, `doces-finos.jpg`, `brigadeiros.jpg`, `pudim.jpg`, `salgados-assados.jpg`, `pao-de-queijo.jpg`, `kit-cafe-manha.jpg` |
+| Fotos de produto (novas) | `assets/img/` ou pasta `enviados/` | nomes já usados: `bolo-chocolate.jpg`, `bolo-ninho-morango.jpg`, `bolo-cenoura.jpg`, `bolo-red-velvet.jpg`, `doces-finos.jpg`, `brigadeiros.jpg`, `pudim.jpg`, `salgados-assados.jpg`, `pao-de-queijo.jpg`, `kit-cafe-manha.jpg` |
 | Fotos das campanhas | `assets/img/sazonal-*.jpg` | `sazonal-pascoa.jpg`, `sazonal-maes.jpg`, `sazonal-namorados.jpg`, `sazonal-aniversario.jpg` |
 | Vídeos | `assets/video/*.mp4` | até ~30 MB cada; depois aponte o nome em `menu-data.js` |
 | Foto da mesa/ambiente | `assets/img/mesa-completa.jpg` | hoje é temporária |
