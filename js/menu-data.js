@@ -249,6 +249,39 @@ window.CARDAPIO = {
     }
   ],
 
+  /* ---- Destaque do mês ------------------------------------------------- */
+  // Faixa que aparece logo abaixo da abertura. É o espaço mais valioso do
+  // site: use para o que você quer vender agora (bolo do mês, ovo de Páscoa,
+  // encomenda de Natal). Para tirar do ar, mude `ativo` para false.
+  // >>> CONFIRMAR: hoje está com o texto e o preço de exemplo.
+  destaque: {
+    ativo: true,
+    etiqueta: 'Destaque do mês',
+    titulo: 'Ninho com Morango',
+    texto: 'Pão de ló fofo, creme de Ninho batido na hora e morango fresco de verdade. É o mais pedido do mês — e a agenda é limitada.',
+    preco: 'R$ 139,90',
+    detalhe: 'Reserve com 48h de antecedência',
+    img: 'assets/img/bolo-ninho-morango.jpg',
+    msg: 'Olá! Quero encomendar o destaque do mês (Bolo Ninho com Morango). Como funciona?'
+  },
+
+  /* ---- Vitrine do Instagram ------------------------------------------- */
+  // Seis fotos que levam para o seu perfil. Troque `img` por prints dos seus
+  // posts e `url` pelo link de cada post (ou mantenha todos apontando para o
+  // perfil). Quem chega pelo Google confia mais depois de ver isso.
+  instagram: {
+    titulo: 'Do nosso dia a dia',
+    chamada: 'O que sai da cozinha e vai para o Instagram — sem produção de estúdio, do jeito que a gente faz.',
+    posts: [
+      { img: 'assets/img/bolo-ninho-morango.jpg', alt: 'Bolo Ninho com Morango',  url: 'https://www.instagram.com/andrades.bakery' },
+      { img: 'assets/img/doces-finos.jpg',        alt: 'Caixa de doces finos',    url: 'https://www.instagram.com/andrades.bakery' },
+      { img: 'assets/img/pao-de-queijo.jpg',      alt: 'Pão de queijo quentinho', url: 'https://www.instagram.com/andrades.bakery' },
+      { img: 'assets/img/brigadeiros.jpg',        alt: 'Brigadeiro gourmet',      url: 'https://www.instagram.com/andrades.bakery' },
+      { img: 'assets/img/salgados-assados.jpg',   alt: 'Salgados assados',        url: 'https://www.instagram.com/andrades.bakery' },
+      { img: 'assets/img/bolo-chocolate.jpg',     alt: 'Bolo de chocolate belga', url: 'https://www.instagram.com/andrades.bakery' }
+    ]
+  },
+
   /* ---- Vídeos ---------------------------------------------------------- */
   // Duas formas de usar:
   //  1) src: 'assets/video/nome.mp4'  -> o vídeo toca aqui no site

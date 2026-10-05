@@ -105,6 +105,7 @@ body {
 body.is-locked { overflow: hidden; }
 
 img, svg, video { display: block; max-width: 100%; }
+picture { display: contents; }   /* o <picture> não interfere no layout */
 img { height: auto; }
 
 a { color: inherit; text-decoration: none; }
@@ -1467,8 +1468,8 @@ p { text-wrap: pretty; }
 .rodape { background: var(--ink); color: rgba(248,243,234,.7); padding-top: clamp(3rem, 6vw, 4.5rem); }
 .rodape__in {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr 1fr;
-  gap: clamp(1.75rem, 4vw, 3rem);
+  grid-template-columns: 1.45fr 1.05fr 1fr 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
@@ -1633,3 +1634,176 @@ p { text-wrap: pretty; }
   body { background: #fff; }
   .produto { break-inside: avoid; }
 }
+
+/* ==========================================================================
+   19. STATUS AO VIVO · DESTAQUE DO MÊS · INSTAGRAM · BAIRROS · CAMPOS EXTRAS
+   ========================================================================== */
+
+/* --- Selo "aberto agora" (calculado a partir de config.funcionamento) --- */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: -.005em;
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+.status[hidden] { display: none; }
+.status::before {
+  content: '';
+  flex: none;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #1F8F52;
+  box-shadow: 0 0 0 3px rgba(31, 143, 82, .16);
+}
+.status.is-fechado::before {
+  background: #B4392B;
+  box-shadow: 0 0 0 3px rgba(180, 57, 43, .14);
+}
+.status b { font-weight: 600; color: var(--ink); }
+.status span { color: var(--ink-mute); }
+@media (max-width: 900px) { .status span { display: none; } }
+@media (max-width: 620px) { .status { display: none; } }
+
+/* --- Faixa de destaque do mês ----------------------------------------- */
+.destaque {
+  background: var(--paper);
+  border-block: 1px solid var(--line-soft);
+}
+.destaque[hidden] { display: none; }
+.destaque__in {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+.destaque__midia .photo { aspect-ratio: 1 / 1; border-radius: var(--r-lg); }
+.destaque__midia { position: relative; }
+.destaque__midia::after {   /* marca d'água de "novo" girando — dá vida sem poluir */
+  content: '✺';
+  position: absolute;
+  right: -.6rem; top: -.6rem;
+  width: 3rem; height: 3rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--caramel);
+  display: grid; place-items: center;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-s);
+}
+.destaque__texto h2 { margin-top: 1rem; }
+.destaque__rodape {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.destaque__preco b {
+  display: block;
+  font-family: var(--f-display);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  color: var(--cocoa);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.destaque__preco span { display: block; margin-top: .4rem; font-size: .8125rem; color: var(--ink-mute); }
+@media (max-width: 860px) {
+  .destaque__in { grid-template-columns: 1fr; }
+  .destaque__midia { max-width: 24rem; }
+}
+
+/* --- Vitrine do Instagram --------------------------------------------- */
+.ig__topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+.ig__grade {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: .7rem;
+}
+.ig__post {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, .06);
+}
+.ig__post img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(.92) brightness(.94);
+  transition: transform .8s var(--ease), filter .45s ease;
+}
+.ig__post::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(20,16,13,0) 45%, rgba(20,16,13,.55));
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.ig__post svg {
+  position: absolute;
+  left: .7rem; bottom: .7rem;
+  z-index: 2;
+  color: var(--cream);
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity .4s ease, transform .45s var(--ease);
+}
+.ig__post:hover img { transform: scale(1.07); filter: none; }
+.ig__post:hover::after, .ig__post:hover svg { opacity: 1; }
+.ig__post:hover svg { transform: none; }
+@media (max-width: 1000px) { .ig__grade { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px)  { .ig__grade { grid-template-columns: repeat(2, 1fr); } }
+
+/* --- Bairros atendidos (dentro da seção escura de encomenda) ---------- */
+.bairros {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+}
+.bairros[hidden] { display: none; }
+.bairros b {
+  display: block;
+  font-family: var(--f-text);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-bottom: .8rem;
+}
+.bairros__lista { display: flex; flex-wrap: wrap; gap: .4rem; }
+.bairros__lista span {
+  padding: .32rem .72rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .05);
+  font-size: .75rem;
+  color: rgba(248, 243, 234, .82);
+}
+
+/* --- Campos extras do formulário (massa, recheio, escrita) ------------- */
+.campos__extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.campos__extra[hidden] { display: none; }   /* o grid sobrescreveria o [hidden] */
+@media (max-width: 720px) { .campos__extra { grid-template-columns: 1fr; } }
+
+/* --- Coluna de novidades no rodapé (5 colunas agora) ------------------- */
+.rodape__lista .btn { margin-top: .1rem; }

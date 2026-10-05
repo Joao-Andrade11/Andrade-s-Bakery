@@ -23,6 +23,11 @@ Sem framework, sem build, sem dependência externa: é só abrir o `index.html`.
 | **Sobre** | História da confeitaria, três diferenciais, assinatura à mão e o processo em 4 passos |
 | **Dúvidas** | Acordeão com 5 perguntas frequentes |
 | **Encomenda** | Formulário que monta a mensagem do WhatsApp (nome, item, data, quantidade, sabor, observações), cartões de contato, horário, entrega, pagamento e Instagram |
+| **Destaque do mês** | Faixa logo depois da abertura com o produto que você quer vender agora (foto, preço, prazo e botão de reserva). Troca num arquivo só; desliga com `ativo: false` |
+| **Status ao vivo** | Selo no cabeçalho calculado pelo horário real: **"Aberto agora · fecha às 19h"** ou **"Fechado agora · abre segunda às 9h"** — muda sozinho, sem você mexer |
+| **Vitrine do Instagram** | 6 fotos que levam ao seu perfil (`@andrades.bakery`) — prova visual de que a produção acontece todo dia |
+| **Bairros atendidos** | Lista de bairros na área de entrega (editável), para a cliente já saber se você atende a rua dela |
+| **Lista de novidades** | Botão no rodapé que abre o WhatsApp pedindo para entrar na lista de avisos (fornadas e datas comemorativas) |
 | **Extras** | Botão flutuante de WhatsApp, rodapé completo, dados estruturados do Google (`Bakery` + cardápio), Open Graph para compartilhar com foto, acessibilidade (teclado, foco visível, `prefers-reduced-motion`) e versão para impressão |
 
 ---
@@ -68,7 +73,9 @@ Quase tudo se muda em **dois arquivos**, sem mexer no HTML.
 | Instagram | `instagram.usuario` / `instagram.url` |
 | Cidade e estado | `cidade`, `uf` |
 | Endereço / só encomenda | `endereco.somenteEncomenda` (`true` esconde o endereço do site) |
-| Horários | `horarios` (lista) e `horarioResumo` |
+| Horário de funcionamento | `funcionamento` — dias (0 = domingo), `abre` e `fecha` em horas (`9`, `19.5` = 19h30, `null` = fechado). **Alimenta o selo "aberto agora", o rodapé do menu e a ficha do Google** |
+| Bairros atendidos | `bairros` (lista; vazio esconde o bloco) |
+| Mensagem da lista de novidades | `whatsapp.mensagemLista` |
 | Prazos | `prazo.comum` e `prazo.dataComemorativa` |
 | Entrega, pagamentos | `entrega`, `pagamentos` |
 | Faixa de aviso no topo | `avisoTopo` |
@@ -95,7 +102,11 @@ Frases de abertura ("Bolo de verdade, feito à mão..."), a história da confeit
 1. **Preços** — todos os valores estão como **exemplo** em `js/menu-data.js`.
 2. **Depoimentos** — os 6 textos são de exemplo; quero os feedbacks reais (prints do WhatsApp servem).
 3. **Cidade e atendimento** — hoje está "Itaboraí — RJ" e "somente por encomenda, sem loja física". Confirme.
-4. **Horários** de funcionamento reais.
+4. **Horários** de funcionamento reais (hoje: seg a sex 9h–19h, sáb 9h–17h, dom fechado).
+5. **Bairros que você atende** — coloquei Centro, Manilha, Venda das Pedras, Porto das Caixas, Itambi e
+   Sambaetiba como exemplo em `config.bairros`. Confirme, corrija ou esvazie a lista.
+6. **Destaque do mês** — hoje está apontando para o Ninho com Morango. Me diga qual produto você quer
+   destacar (e o preço) que eu troco.
 5. **Formas de pagamento** e política de sinal.
 6. **Prazo real** de encomenda (está 48h comum / 5 a 7 dias em datas comemorativas).
 7. **Recheios e itens** que vocês realmente fazem — para o cardápio não prometer o que não existe.
@@ -113,6 +124,16 @@ Frases de abertura ("Bolo de verdade, feito à mão..."), a história da confeit
 > **Importante:** as fotos que estão no site agora são **imagens de demonstração** geradas para montar o layout (bolo, doces, mesa, mão confeitando). Elas são bonitas, mas **são genéricas e não são da sua produção** — a ideia é trocar pelas reais. Ao substituir, mantenha o mesmo nome de arquivo e **nada mais precisa ser editado**.
 
 Guia detalhado do que fotografar, com prioridade: [`assets/README.md`](assets/README.md).
+
+---
+
+## 5.1. Pesquisa de mercado
+
+Antes de desenhar, estudei sites de referência do setor — Dominique Ansel, Bobbette & Belle, Beaucoup,
+Janjou, Toad, Bernice Bakery (Awwwards), Magnolia, além das brasileiras Confeitaria Delícia e Confeitaria
+Dama e das plataformas de encomenda (Confeitar, Meslo, Confeita, Cardapiando). O documento
+**[REFERENCIAS.md](REFERENCIAS.md)** tem o que cada uma faz bem, os números de conversão que sustentam
+cada decisão e o roadmap por ordem de retorno — incluindo o que **já foi aplicado** neste site.
 
 ---
 
@@ -162,7 +183,7 @@ Andrade-s-Bakery/
 
 ## 8. Notas técnicas
 
-- **Peso:** página inicial com ~1,7 MB de imagens já otimizadas (JPEG progressivo, maior lado em 1200–1500 px), 0 requisição externa e nenhum JavaScript de terceiros.
+- **Peso:** as fotos vão em **WebP** (com JPEG de reserva para navegadores antigos) — ~1,6 MB no total, contra 2,8 MB se fosse só JPEG. Nenhuma requisição externa e nenhum JavaScript de terceiros. A foto da abertura é pré-carregada (`preload`) para a primeira dobra aparecer rápido.
 - **Sem flash de conteúdo:** o JS monta tudo no `DOMContentLoaded` e as animações de entrada respeitam `prefers-reduced-motion`.
 - **Se uma foto faltar**, o card mostra um marcador desenhado ("foto a caminho") em vez de imagem quebrada — nada quebra o layout.
 - **Acessibilidade:** navegação por teclado nas abas e no cardápio, `aria-*` correto, foco visível, contraste alto opcional, link "ir para o conteúdo" e textos alternativos nas fotos.

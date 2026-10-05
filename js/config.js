@@ -1,8 +1,8 @@
 /* ==========================================================================
    ANDRADE'S BAKERY — CONFIGURAÇÃO RÁPIDA
    --------------------------------------------------------------------------
-   É aqui que você muda telefone, Instagram, endereço e horários.
-   Tudo o que está marcado com  // >>> TROCAR  precisa da sua confirmação.
+   É aqui que você muda telefone, Instagram, endereço, horários e bairros.
+   Tudo o que está marcado com  // >>> CONFIRMAR  precisa da sua confirmação.
    Depois de editar, salve o arquivo e recarregue o site.
    ========================================================================== */
 
@@ -10,7 +10,7 @@ window.ANDRADES = {
   /* ---- Marca ---------------------------------------------------------- */
   nome: "Andrade's Bakery",
   assinatura: 'Confeitaria artesanal',
-  cidade: 'Itaboraí',        // >>> TROCAR se não for essa a cidade
+  cidade: 'Itaboraí',        // >>> CONFIRMAR
   uf: 'RJ',
   slogan: 'Feito à mão, com o tempo que o doce pede.',
 
@@ -18,9 +18,11 @@ window.ANDRADES = {
   whatsapp: {
     numero: '5521990726282',          // +55 21 99072-6282
     exibicao: '(21) 99072-6282',
-    // Mensagem que já vai preenchida quando a pessoa clica no botão do topo:
     mensagemPadrao:
-      'Olá! Vim pelo site da Andrade\'s Bakery e gostaria de informações sobre encomendas. 🍰'
+      'Olá! Vim pelo site da Andrade\'s Bakery e gostaria de informações sobre encomendas. 🍰',
+    // Mensagem do botão "entrar na lista de novidades" (rodapé)
+    mensagemLista:
+      'Olá! Quero entrar na lista e receber os sabores do dia e as novidades da Andrade\'s Bakery.'
   },
 
   /* ---- Redes sociais --------------------------------------------------- */
@@ -29,36 +31,46 @@ window.ANDRADES = {
     url: 'https://www.instagram.com/andrades.bakery'
   },
 
-  /* ---- Endereço / atendimento ----------------------------------------- */
-  // >>> TROCAR: endereço completo. Se o atendimento for só por encomenda
-  // (sem loja física), deixe "somenteEncomenda: true" e o endereço some do site.
+  /* ---- Status "aberto agora" ------------------------------------------
+     dias: 0 = domingo, 1 = segunda ... 6 = sábado
+     abre / fecha: em horas decimais (9 = 9h · 19.5 = 19h30 · null = fechado)
+     Pode ter mais de uma faixa no mesmo dia (ex.: manhã e tarde).
+     --------------------------------------------------------------------- */
+  funcionamento: [
+    { rotulo: 'Segunda a sexta', dias: [1, 2, 3, 4, 5], abre: 9,  fecha: 19 },
+    { rotulo: 'Sábado',          dias: [6],             abre: 9,  fecha: 17 },
+    { rotulo: 'Domingo',         dias: [0],             abre: null, fecha: null }
+  ],
+  // Mostrado no rodapé do menu do celular e no cartão de horários
+  atendimentoFrase: 'Atendemos de seg a sáb, no horário de funcionamento.',
+
+  /* ---- Entrega --------------------------------------------------------- */
+  // >>> CONFIRMAR: bairros/cidades que você realmente atende.
+  // Deixe a lista vazia ([]) para o site mostrar só "Itaboraí e região".
+  bairros: ['Centro', 'Manilha', 'Venda das Pedras', 'Porto das Caixas', 'Itambi', 'Sambaetiba'],
+  entrega: 'Itaboraí e região',
+  pagamentos: ['Pix', 'Dinheiro', 'Cartão de débito', 'Cartão de crédito'],
+
+  /* ---- Endereço --------------------------------------------------------
+     >>> CONFIRMAR: se o atendimento for só por encomenda (sem loja física),
+     deixe "somenteEncomenda: true" e o endereço não aparece no site.
+     --------------------------------------------------------------------- */
   endereco: {
     somenteEncomenda: true,
     rua: 'Rua Exemplo, 000 — Centro',
     complemento: '',
     cidade: 'Itaboraí — RJ',
     cep: '00000-000',
-    mapaUrl: '' // cole aqui o link do Google Maps, se tiver
+    mapaUrl: ''
   },
 
-  /* ---- Horário de funcionamento --------------------------------------- */
-  horarios: [
-    { dia: 'Segunda a sexta', hora: '09h — 19h' },
-    { dia: 'Sábado', hora: '09h — 17h' },
-    { dia: 'Domingo', hora: 'Fechado' }
-  ],
-  horarioResumo: 'Seg a Sex, 9h às 19h · Sáb, 9h às 17h',
-
-  /* ---- Regras comerciais (aparecem nos avisos e no FAQ) --------------- */
+  /* ---- Regras comerciais (aparecem nos avisos e no FAQ) ---------------- */
   prazo: {
     comum: '48 horas',
     dataComemorativa: '5 a 7 dias'
   },
-  entrega: 'Itaboraí e região',
-  pagamentos: ['Pix', 'Dinheiro', 'Cartão de débito', 'Cartão de crédito'],
 
-  /* ---- Recados da marca ----------------------------------------------- */
-  // Selo que aparece no topo do site. Útil para avisar de prazos em datas cheias.
+  /* ---- Recado fixo no topo do site ------------------------------------- */
   avisoTopo:
     'Encomendas para datas comemorativas com 5 a 7 dias de antecedência ✺ Atendimento pelo WhatsApp',
 
@@ -68,6 +80,6 @@ window.ANDRADES = {
     descricao:
       "Confeitaria artesanal em Itaboraí/RJ. Bolos, doces finos, salgados assados e encomendas personalizadas para aniversários, Páscoa, Dia das Mães e Dia dos Namorados. Peça pelo WhatsApp.",
     imagem: 'assets/img/og-andrades.jpg',
-    site: 'https://andradesbakery.com.br' // >>> TROCAR pelo domínio final
+    site: 'https://andradesbakery.com.br' // >>> CONFIRMAR domínio final
   }
 };

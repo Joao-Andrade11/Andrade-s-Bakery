@@ -39,6 +39,7 @@
 <link rel="apple-touch-icon" href="assets/logo/logo-andrades-icone.png">
 
 <!-- Fontes auto-hospedadas (nenhuma conexão externa) -->
+<link rel="preload" href="assets/img/hero-bolo.webp" as="image" type="image/webp" fetchpriority="high">
 <link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
@@ -176,6 +177,7 @@
     </nav>
 
     <div class="header-cta">
+      <span class="status" id="statusTopo" hidden></span>
       <a class="btn btn--wa btn--sm only-desktop" href="#" data-wa="">
         <svg width="17" height="17" aria-hidden="true"><use href="#i-wa"/></svg>
         Encomendar
@@ -260,10 +262,16 @@
 
     <div class="colagem" data-rev style="--delay:120ms">
       <div class="colagem__principal">
-        <img src="assets/img/hero-bolo.jpg" alt="Bolo de chocolate em camadas com ganache e flor de sal" width="1024" height="1536" fetchpriority="high" decoding="async">
+        <picture>
+          <source type="image/webp" srcset="assets/img/hero-bolo.webp">
+          <img src="assets/img/hero-bolo.jpg" alt="Bolo de chocolate em camadas com ganache e flor de sal" width="1024" height="1536" fetchpriority="high" decoding="async">
+        </picture>
       </div>
       <div class="colagem__secundaria">
-        <img src="assets/img/hero-detalhe.jpg" alt="Mãos aplicando bico de confeiteiro em bolo red velvet" width="1024" height="1536" loading="lazy" decoding="async">
+        <picture>
+          <source type="image/webp" srcset="assets/img/hero-detalhe.webp">
+          <img src="assets/img/hero-detalhe.jpg" alt="Mãos aplicando bico de confeiteiro em bolo red velvet" width="1024" height="1536" loading="lazy" decoding="async">
+        </picture>
       </div>
       <div class="colagem__selo">
         <span>Feito à mão<em>todo dia</em></span>
@@ -284,6 +292,11 @@
 <!-- ======================================================================
      CARDÁPIO
      ====================================================================== -->
+<!-- ======================================================================
+     DESTAQUE DO MÊS (montado pelo js/menu-data.js → `destaque`)
+     ====================================================================== -->
+<section class="destaque" id="destaque" hidden data-rev></section>
+
 <section class="sec sec--paper" id="cardapio">
   <div class="wrap">
     <div class="cardapio__topo">
@@ -404,12 +417,35 @@
 <!-- ======================================================================
      SOBRE + PROCESSO
      ====================================================================== -->
+<!-- ======================================================================
+     INSTAGRAM
+     ====================================================================== -->
+<section class="sec sec--dark ig" id="instagram">
+  <div class="wrap">
+    <div class="ig__topo">
+      <div class="sec-head" style="margin-bottom:0" data-rev>
+        <span class="eyebrow">Instagram</span>
+        <h2 class="h-l" id="igTitulo">Do nosso dia a dia</h2>
+        <p class="lead" style="color:rgba(248,243,234,.72)" id="igChamada"></p>
+      </div>
+      <a class="btn btn--ghost" id="igBotao" href="https://www.instagram.com/andrades.bakery" target="_blank" rel="noopener" data-rev style="--delay:100ms">
+        <svg width="18" height="18" aria-hidden="true"><use href="#i-ig"/></svg>
+        Seguir <span id="igUser">@andrades.bakery</span>
+      </a>
+    </div>
+    <div class="ig__grade" id="igGrade" data-rev></div>
+  </div>
+</section>
+
 <section class="sec sec--cream" id="sobre">
   <div class="wrap">
     <div class="sobre__in">
       <div class="sobre__midia" data-rev>
         <div class="photo">
-          <img src="assets/img/mesa-completa.jpg" alt="Mesa com bolo, salgados assados, brigadeiros e pão artesanal" width="1500" height="1000" loading="lazy" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="assets/img/mesa-completa.webp">
+            <img src="assets/img/mesa-completa.jpg" alt="Mesa com bolo, salgados assados, brigadeiros e pão artesanal" width="1500" height="1000" loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="sobre__carimbo">
           <span>Produção<em>por encomenda</em>nada de vitrine</span>
@@ -546,6 +582,11 @@
             </span>
           </a>
         </div>
+
+        <div class="bairros" id="bairrosBloco" hidden>
+          <b>Bairros que atendemos</b>
+          <div class="bairros__lista" id="bairrosLista"></div>
+        </div>
       </div>
 
       <!-- Formulário que monta a mensagem do WhatsApp -->
@@ -594,6 +635,50 @@
             <input id="f-sabor" name="sabor" type="text" placeholder="Ex.: Ninho com morango">
           </div>
 
+          <div class="campo">
+            <label for="f-restricao">Restrição alimentar</label>
+            <select id="f-restricao" name="restricao">
+              <option>Nenhuma</option>
+              <option>Sem lactose</option>
+              <option>Sem glúten</option>
+              <option>Vegano</option>
+              <option>Alergia a ovo, leite ou castanhas</option>
+              <option>Outra — explico no WhatsApp</option>
+            </select>
+          </div>
+
+          <div class="campos__extra campo--full" id="camposBolo" hidden>
+            <div class="campo">
+              <label for="f-massa">Massa do bolo</label>
+              <select id="f-massa" name="massa">
+                <option>Escolher depois</option>
+                <option>Pão de ló branco</option>
+                <option>Chocolate</option>
+                <option>Cenoura</option>
+                <option>Red velvet</option>
+                <option>Amanteigada (mais firme, para andar)</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="f-recheio">Recheio</label>
+              <select id="f-recheio" name="recheio">
+                <option>Escolher depois</option>
+                <option>Brigadeiro</option>
+                <option>Ninho</option>
+                <option>Ninho com morango</option>
+                <option>Doce de leite</option>
+                <option>Quatro leites</option>
+                <option>Ganache meio amargo</option>
+                <option>Frutas vermelhas</option>
+              </select>
+            </div>
+            <div class="campo campo--full">
+              <label for="f-escrita">Mensagem no bolo (opcional)</label>
+              <input id="f-escrita" name="escrita" type="text" placeholder="Ex.: Parabéns, Ana! 30 anos">
+              <span class="campo__dica">Escrevemos à mão no papel de arroz, sem custo extra.</span>
+            </div>
+          </div>
+
           <div class="campo campo--full">
             <label for="f-obs">Alguma observação? (opcional)</label>
             <textarea id="f-obs" name="obs" placeholder="Restrição alimentar, endereço de entrega, tema da festa, escrever nome no bolo..."></textarea>
@@ -634,6 +719,17 @@
           Bolos, doces, salgados assados e kits café da manhã feitos por encomenda em
           Itaboraí/RJ. Produção artesanal, sem mistura pronta e sem pressa.
         </p>
+      </div>
+
+      <div>
+        <h4>Novidades</h4>
+        <p class="rodape__nota" style="margin-bottom:.9rem">
+          Sabores do dia, fornadas e avisos de datas comemorativas direto no seu WhatsApp.
+        </p>
+        <a class="btn btn--wa btn--sm" href="#" data-wa-lista>
+          <svg width="16" height="16" aria-hidden="true"><use href="#i-wa"/></svg>
+          Entrar na lista
+        </a>
       </div>
 
       <div>

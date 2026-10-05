@@ -61,10 +61,10 @@
   // Se a imagem não existir no servidor, troca pelo marcador desenhado
   function comFallbackDeImagem(img) {
     img.addEventListener('error', function () {
-      var midia = img.parentElement;
-      if (!midia || midia.querySelector('.produto__vazio')) return;
-      img.remove();
-      midia.insertAdjacentHTML('afterbegin', midiaPlaceholder(midia.getAttribute('data-fallback') || 'foto a caminho'));
+      var caixa = img.closest('picture') ? img.closest('picture').parentElement : img.parentElement;
+      if (!caixa || caixa.querySelector('.produto__vazio')) return;
+      (img.closest('picture') || img).remove();
+      caixa.insertAdjacentHTML('afterbegin', midiaPlaceholder(caixa.getAttribute('data-fallback') || 'foto a caminho'));
     });
   }
 
@@ -76,6 +76,25 @@
     'vegano':       { texto: 'Vegano',      classe: '' },
     'data-especial':{ texto: 'Data especial', classe: '' }
   };
+
+  // Escapa texto que vai dentro de atributo HTML
+  function attr(txt) {
+    return String(txt == null ? '' : txt)
+      .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // <picture> com WebP + JPEG de reserva: quase metade do peso no celular,
+  // e se o .webp faltar o navegador usa o .jpg sozinho — nada quebra.
+  function imgTag(src, alt, opcoes) {
+    var o = opcoes || {};
+    var attrs = o.prioridade
+      ? ' fetchpriority="high" decoding="async"'
+      : ' loading="lazy" decoding="async"';
+    return '<picture>' +
+             '<source type="image/webp" srcset="' + attr(String(src).replace(/\.jpe?g$/i, '.webp')) + '">' +
+             '<img src="' + attr(src) + '" alt="' + attr(alt || '') + '"' + attrs + '>' +
+           '</picture>';
+  }
 
   function htmlTags(tags) {
     if (!tags || !tags.length) return '';
@@ -126,13 +145,12 @@
     if (num) num.textContent = (CFG.whatsapp && CFG.whatsapp.exibicao) || '';
 
     var hor = $('#contatoHorario');
-    if (hor) hor.textContent = CFG.horarioResumo || '';
+    if (hor) hor.textContent = resumoHorarios();
 
     var horDet = $('#contatoHorarioDetalhe');
-    if (horDet && CFG.horarios) {
-      horDet.textContent = CFG.horarios.map(function (h) {
-        return h.dia + ': ' + h.hora;
-      }).join(' · ');
+    if (horDet) {
+      var st = statusAgora();
+      horDet.textContent = st.texto + (st.detalhe ? ' (' + st.detalhe + ')' : '') + ' · ' + listaHorarios();
     }
 
     var ent = $('#contatoEntrega');
@@ -142,7 +160,7 @@
     if (pag && CFG.pagamentos) pag.textContent = CFG.pagamentos.join(' · ');
 
     var drHor = $('#drawerHorario');
-    if (drHor) drHor.textContent = CFG.horarioResumo || '';
+    if (drHor) drHor.textContent = statusAgora().texto;
 
     // Faixa animada
     var itens = [
@@ -207,7 +225,7 @@
 
     grade.innerHTML = DADOS.produtos.map(function (p) {
       var midiaHTML = p.img
-        ? '<img src="' + p.img + '" alt="' + p.nome + '" loading="lazy" decoding="async">'
+        ? imgTag(p.img, p.nome)
         : midiaPlaceholder('foto a caminho');
 
       var msgPedido = 'Olá! Quero encomendar: ' + p.nome + (p.preco ? ' (' + p.preco + ')' : '') +
@@ -264,7 +282,7 @@
     paineis.innerHTML = DADOS.sazonais.map(function (s, i) {
       var msg = 'Olá! Quero encomendar para o ' + s.aba + '. Podem me passar as opções e o prazo?';
       var midiaHTML = s.img
-        ? '<img src="' + s.img + '" alt="' + s.titulo + '" loading="lazy" decoding="async">'
+        ? imgTag(s.img, s.titulo)
         : midiaPlaceholder('foto da campanha');
 
       return '' +
@@ -285,7 +303,7 @@
             }).join('') + '</ul>' +
             (s.obs ? '<p class="painel__obs">' + s.obs + '</p>' : '') +
             '<div class="painel__acoes">' +
-              '<a class="btn btn--wa" href="#" data-wa data-wa-msg="' + msg + '">' +
+              '<a class="btn btn--wa" href="#" data-wa data-wa-msg="' + attr(msg) + '">' +
                 '<svg width="18" height="18" aria-hidden="true"><use href="#i-wa"/></svg> Reservar pelo WhatsApp' +
               '</a>' +
               '<span class="painel__prazo">' +
@@ -343,7 +361,7 @@
     grade.innerHTML = DADOS.videos.map(function (v, i) {
       var temArquivo = !!v.src;
       var poster = v.poster
-        ? '<img src="' + v.poster + '" alt="" loading="lazy" decoding="async">'
+        ? imgTag(v.poster, '')
         : midiaPlaceholder('vídeo');
       return '' +
         '<button class="video" type="button" data-video="' + i + '" aria-label="Assistir: ' + v.titulo + '">' +
@@ -510,6 +528,19 @@
     if (!form) return;
     var erro = $('#formErro');
 
+    // Campos de bolo aparecem só quando faz sentido (massa, recheio, escrita)
+    var campoTipo = $('#f-tipo');
+    var camposBolo = $('#camposBolo');
+    function alternarCamposBolo() {
+      if (!campoTipo || !camposBolo) return;
+      var texto = (campoTipo.value || '').toLowerCase();
+      camposBolo.hidden = !/bolo|anivers|páscoa|pascoa|namorados|mães|maes|torta/.test(texto);
+    }
+    if (campoTipo) {
+      campoTipo.addEventListener('change', alternarCamposBolo);
+      alternarCamposBolo();
+    }
+
     // Impede datas no passado
     var campoData = $('#f-data');
     if (campoData) {
@@ -527,7 +558,11 @@
         data:   ($('#f-data') || {}).value || '',
         pessoas:($('#f-pessoas') || {}).value || '',
         sabor:  ($('#f-sabor') || {}).value || '',
-        obs:    ($('#f-obs') || {}).value || ''
+        obs:    ($('#f-obs') || {}).value || '',
+        restricao: ($('#f-restricao') || {}).value || '',
+        massa:  ($('#f-massa') || {}).value || '',
+        recheio: ($('#f-recheio') || {}).value || '',
+        escrita: ($('#f-escrita') || {}).value || ''
       };
 
       var faltando = [];
@@ -560,6 +595,14 @@
         '*Quantidade:* ' + d.pessoas.trim()
       ];
       if (d.sabor.trim()) linhas.push('*Sabor/tema:* ' + d.sabor.trim());
+
+      // Detalhes que só fazem sentido para bolo (e não vêm preenchidos por padrão)
+      if (camposBolo && !camposBolo.hidden) {
+        if (d.massa && d.massa !== 'Escolher depois')   linhas.push('*Massa:* ' + d.massa);
+        if (d.recheio && d.recheio !== 'Escolher depois') linhas.push('*Recheio:* ' + d.recheio);
+        if (d.escrita.trim()) linhas.push('*Mensagem no bolo:* ' + d.escrita.trim());
+      }
+      if (d.restricao && d.restricao !== 'Nenhuma') linhas.push('*Restrição alimentar:* ' + d.restricao);
       if (d.obs.trim())   linhas.push('*Observação:* ' + d.obs.trim());
       linhas.push('', '(mensagem enviada pelo site da Andrade\'s Bakery)');
 
@@ -676,6 +719,178 @@
   }
 
   /* ======================================================================
+     HORÁRIO DE FUNCIONAMENTO E STATUS "ABERTO AGORA"
+     ====================================================================== */
+
+  // 19.5 -> "19h30" · 9 -> "9h"
+  function horaTexto(n) {
+    if (n == null) return '—';
+    var h = Math.floor(n);
+    var m = Math.round((n - h) * 60);
+    return h + 'h' + (m ? String(m).padStart(2, '0') : '');
+  }
+
+  // "Segunda a sexta" -> "Seg a Sex" · "Sábado" -> "Sáb"
+  function abreviar(rotulo) {
+    var tres = function (t) { return t.charAt(0).toUpperCase() + t.slice(1, 3).toLowerCase(); };
+    var partes = String(rotulo).split(/\s+a\s+/i);
+    return partes.length > 1 ? tres(partes[0]) + ' a ' + tres(partes[1]) : tres(rotulo);
+  }
+
+  function faixasDoDia(dia) {
+    return (CFG.funcionamento || []).filter(function (f) {
+      return f.dias && f.dias.indexOf(dia) >= 0 && f.abre != null;
+    }).sort(function (a, b) { return a.abre - b.abre; });
+  }
+
+  function resumoHorarios() {
+    return (CFG.funcionamento || []).filter(function (f) { return f.abre != null; })
+      .map(function (f) { return abreviar(f.rotulo) + ', ' + horaTexto(f.abre) + ' às ' + horaTexto(f.fecha); })
+      .join(' · ');
+  }
+
+  function listaHorarios() {
+    return (CFG.funcionamento || []).map(function (f) {
+      return f.rotulo + ': ' + (f.abre == null ? 'Fechado' : horaTexto(f.abre) + ' — ' + horaTexto(f.fecha));
+    }).join(' · ');
+  }
+
+  // Descobre se está aberto agora — usado no cabeçalho e nos contatos
+  function statusAgora() {
+    var agora = new Date();
+    var dia = agora.getDay();
+    var h = agora.getHours() + agora.getMinutes() / 60;
+    var nomes = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+
+    var hoje = faixasDoDia(dia);
+    for (var i = 0; i < hoje.length; i++) {
+      if (h >= hoje[i].abre && h < hoje[i].fecha) {
+        return { aberto: true, texto: 'Aberto agora', detalhe: 'fecha às ' + horaTexto(hoje[i].fecha) };
+      }
+    }
+    for (var j = 0; j < hoje.length; j++) {
+      if (h < hoje[j].abre) {
+        return { aberto: false, texto: 'Fechado agora', detalhe: 'abre hoje às ' + horaTexto(hoje[j].abre) };
+      }
+    }
+    for (var k = 1; k <= 7; k++) {
+      var d = (dia + k) % 7;
+      var prox = faixasDoDia(d);
+      if (prox.length) {
+        return {
+          aberto: false,
+          texto: 'Fechado agora',
+          detalhe: 'abre ' + nomes[d] + ' às ' + horaTexto(prox[0].abre)
+        };
+      }
+    }
+    return { aberto: false, texto: 'Fechado', detalhe: '' };
+  }
+
+  function renderStatus() {
+    var st = statusAgora();
+    var alvo = $('#statusTopo');
+    if (alvo) {
+      alvo.hidden = false;
+      alvo.className = 'status' + (st.aberto ? '' : ' is-fechado');
+      alvo.innerHTML = '<b>' + st.texto + '</b>' + (st.detalhe ? '<span>' + st.detalhe + '</span>' : '');
+      alvo.setAttribute('title', st.texto + (st.detalhe ? ' — ' + st.detalhe : ''));
+    }
+  }
+
+  /* ======================================================================
+     DESTAQUE DO MÊS  (js/menu-data.js → `destaque`)
+     ====================================================================== */
+  function renderDestaque() {
+    var sec = $('#destaque');
+    var d = DADOS.destaque;
+    if (!sec || !d || !d.ativo) return;
+
+    var msg = d.msg || ('Olá! Quero encomendar o destaque do mês: ' + d.titulo + '.');
+    var midia = d.img
+      ? imgTag(d.img, d.titulo, { prioridade: true })
+      : midiaPlaceholder('foto do destaque');
+
+    sec.innerHTML =
+      '<div class="wrap destaque__in">' +
+        '<div class="destaque__midia">' +
+          '<div class="photo" data-fallback="foto do destaque">' + midia + '</div>' +
+        '</div>' +
+        '<div class="destaque__texto">' +
+          '<span class="chip chip--caramel">' + (d.etiqueta || 'Destaque do mês') + '</span>' +
+          '<h2 class="h-l">' + d.titulo + '</h2>' +
+          (d.texto ? '<p class="lead" style="margin-top:.9rem;max-width:36rem">' + d.texto + '</p>' : '') +
+          '<div class="destaque__rodape">' +
+            '<div class="destaque__preco">' +
+              '<b>' + (d.preco || '') + '</b>' +
+              (d.detalhe ? '<span>' + d.detalhe + '</span>' : '') +
+            '</div>' +
+            '<a class="btn btn--wa" href="#" data-wa data-wa-msg="' + attr(msg) + '">' +
+              '<svg width="18" height="18" aria-hidden="true"><use href="#i-wa"/></svg> Reservar no WhatsApp' +
+            '</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    sec.hidden = false;
+    $$('img', sec).forEach(comFallbackDeImagem);
+    aplicarWhatsApp();
+  }
+
+  /* ======================================================================
+     VITRINE DO INSTAGRAM  (js/menu-data.js → `instagram`)
+     ====================================================================== */
+  function renderInstagram() {
+    var grade = $('#igGrade');
+    var ig = DADOS.instagram;
+    var sec = $('#instagram');
+    if (!grade || !ig || !ig.posts || !ig.posts.length) {
+      if (sec) sec.hidden = true;
+      return;
+    }
+
+    var t = $('#igTitulo');   if (t && ig.titulo)  t.textContent = ig.titulo;
+    var c = $('#igChamada');  if (c && ig.chamada) c.textContent = ig.chamada;
+    var u = $('#igUser');     if (u && CFG.instagram) u.textContent = '@' + CFG.instagram.usuario;
+    var b = $('#igBotao');    if (b && CFG.instagram) b.setAttribute('href', CFG.instagram.url);
+
+    var padrao = (CFG.instagram && CFG.instagram.url) || '#';
+    grade.innerHTML = ig.posts.map(function (post) {
+      return '<a class="ig__post" href="' + attr(post.url || padrao) + '" target="_blank" rel="noopener" ' +
+             'aria-label="' + attr(post.alt || 'Ver no Instagram') + '">' +
+               imgTag(post.img, post.alt || '') +
+               '<svg width="19" height="19" aria-hidden="true"><use href="#i-ig"/></svg>' +
+             '</a>';
+    }).join('');
+
+    $$('img', grade).forEach(comFallbackDeImagem);
+  }
+
+  /* ======================================================================
+     BAIRROS ATENDIDOS  (js/config.js → `bairros`)
+     ====================================================================== */
+  function renderBairros() {
+    var bloco = $('#bairrosBloco');
+    var lista = $('#bairrosLista');
+    var bairros = CFG.bairros || [];
+    if (!bloco || !lista || !bairros.length) return;
+    lista.innerHTML = bairros.map(function (b) { return '<span>' + attr(b) + '</span>'; }).join('');
+    bloco.hidden = false;
+  }
+
+  /* ======================================================================
+     LISTA DE NOVIDADES NO WHATSAPP  ([data-wa-lista])
+     ====================================================================== */
+  function iniciarLista() {
+    var msg = (CFG.whatsapp && CFG.whatsapp.mensagemLista) || 'Olá! Quero receber as novidades.';
+    $$('[data-wa-lista]').forEach(function (el) {
+      el.setAttribute('href', linkWhatsApp(msg));
+      el.setAttribute('target', '_blank');
+      el.setAttribute('rel', 'noopener');
+    });
+  }
+
+  /* ======================================================================
      INICIALIZAÇÃO
      ====================================================================== */
   function iniciar() {
@@ -685,6 +900,11 @@
     renderOutros();
     renderSazonais();
     renderVideos();
+    renderDestaque();
+    renderInstagram();
+    renderBairros();
+    iniciarLista();
+    renderStatus();
     renderDepoimentos();
     renderFAQ();
     aplicarWhatsApp();
