@@ -111,7 +111,9 @@ Frases de abertura ("Bolo de verdade, feito à mão..."), a história da confeit
 5.1. ✅ **Feito sob medida — confirmado:** a casa faz bolos de **qualquer tamanho, massa e recheio**,
    100% do jeito que o cliente preferir. A tabela de tamanhos virou **referência** (não limitação) e o
    site diz isso na abertura, na seção de bolos de festa, no formulário e no FAQ.
-5.2. ⏳ **Preços** da tabela de referência continuam sendo exemplo — me passe os valores reais.
+5.2. ✅ **Preços:** o cliente decidiu **não exibir preços** — o site mostra "sob orçamento" e explica
+   que o valor varia (tamanho, massa, recheio, acabamento). Os valores podem ser cadastrados em
+   `menu-data.js` e ficam prontos; para exibi-los, basta `mostrarPrecos: true` em `config.js`.
 6. **Destaque do mês** — hoje está apontando para o Ninho com Morango. Me diga qual produto você quer
    destacar (e o preço) que eu troco.
 5. **Formas de pagamento** e política de sinal.
@@ -125,6 +127,35 @@ O caminho que funciona: **suba os arquivos no próprio repositório do GitHub**,
 [`enviados/`](enviados/) — o passo a passo está no arquivo de dentro dela. Pode mandar tudo
 com o nome original do celular (`IMG_1234.jpg`); eu escolho as melhores, renomeio para os nomes
 que o site espera, comprimo e publico.
+
+### Preços — decisão do cliente: NÃO aparecem no site
+
+O site **não mostra nenhum preço** (decisão do cliente, 05/10/2026). No lugar do valor, cada item
+exibe **"sob orçamento"**, e o cardápio traz um aviso explicando o motivo:
+
+> *"Os valores variam conforme tamanho, massa, recheio e acabamento. Diga o que você quer — a gente
+> responde com o orçamento e o esboço, sem compromisso."*
+
+Isso vale para o cardápio, o destaque do mês, a tabela de tamanhos e as datas especiais. A pergunta
+**"Por que o site não mostra os preços?"** também está no FAQ, com a explicação em texto.
+
+**Como ligar os preços de volta (se mudar de ideia):** em `js/config.js`, troque
+`mostrarPrecos: false` por **`mostrarPrecos: true`**. Pronto — os valores cadastrados em
+`js/menu-data.js` aparecem em todos os lugares. Nada mais precisa ser editado (testado nos dois modos).
+
+### Logo oficial — troca automática
+
+Basta salvar o arquivo na pasta `assets/logo/` que **o site troca sozinho**, sem editar código:
+
+| Arquivo | Onde entra |
+|---|---|
+| `logo-andrades.png` | Cabeçalho (fundo claro) — PNG transparente |
+| `logo-andrades-claro.png` | Rodapé (fundo escuro) — mesma logo em versão clara |
+| `logo-andrades-icone.png` | Ícone ao salvar o site na tela do celular |
+| `favicon.svg` | Aba do navegador (versão pequena e simples) |
+
+Enquanto esses arquivos não existem, o site usa a marca vetorial provisória (a letra A com a calda
+de chocolate, desenhada a partir da logo enviada).
 
 ### Fotos e vídeos — recebidos e aplicados (05/10/2026)
 
@@ -149,9 +180,10 @@ e bolo de flores. O quinto vídeo enviado ficou de reserva em `enviados/`.
 
 | Arquivo | Onde colocar | Observação |
 |---|---|---|
+| 📩 **Chegando** (o cliente avisou que vai enviar) | Fotos das campanhas de Páscoa, Dia das Mães e Dia dos Namorados; mais fotos de bolos; a logo oficial; os depoimentos reais |
 | Fotos das campanhas | `assets/img/sazonal-pascoa.jpg`, `sazonal-maes.jpg`, `sazonal-namorados.jpg` | As 3 abas sazonais estão com marcador desenhado ("foto da campanha") até você mandar — optei por **não usar imagem gerada como se fosse produto seu** |
 | Fotos de doces, salgados e kits | `assets/img/doces-finos.jpg`, `brigadeiros.jpg`, `pudim.jpg`, `salgados-assados.jpg`, `pao-de-queijo.jpg`, `kit-cafe-manha.jpg` | Hoje esses itens aparecem com marcador "foto a caminho" — é só mandar que eu encaixo |
-| Foto de bolo de dois andares | qualquer nome | O card existe, sem foto |
+| ~~Bolo de dois andares~~ | — | 🚫 **Removido do site:** o cliente informou que ainda não faz bolo de dois andares. Saíram o card, a linha da tabela, o item da aba de aniversários e as menções no FAQ |
 | Logo oficial | me mande o arquivo (**PNG transparente**, SVG, AI, PDF ou CDR) | Hoje o site usa uma marca provisória desenhada a partir da sua logo: a letra A com a calda de chocolate. Assim que você enviar o arquivo, eu coloco a sua no lugar em todos os pontos (cabeçalho, rodapé, ícone do celular e compartilhamento) |
 | Fotos de produto (novas) | `assets/img/` ou pasta `enviados/` | nomes já usados: `bolo-chocolate.jpg`, `bolo-ninho-morango.jpg`, `bolo-cenoura.jpg`, `bolo-red-velvet.jpg`, `doces-finos.jpg`, `brigadeiros.jpg`, `pudim.jpg`, `salgados-assados.jpg`, `pao-de-queijo.jpg`, `kit-cafe-manha.jpg` |
 | Fotos das campanhas | `assets/img/sazonal-*.jpg` | `sazonal-pascoa.jpg`, `sazonal-maes.jpg`, `sazonal-namorados.jpg`, `sazonal-aniversario.jpg` |

@@ -77,6 +77,25 @@
     'data-especial':{ texto: 'Data especial', classe: '' }
   };
 
+  // Mostrar preço no site? (js/config.js → mostrarPrecos)
+  // Quando está desligado, cada item exibe "sob orçamento" e o aviso do cardápio
+  // explica que o valor varia conforme tamanho, massa, recheio e acabamento.
+  function mostraPrecos() {
+    return !(CFG && CFG.mostrarPrecos === false);
+  }
+
+  // Preço (ou o rótulo de orçamento, quando os preços estão ocultos)
+  function precoOuOrcamento(preco) {
+    if (mostraPrecos()) return '<span class="produto__preco">' + (preco || '') + '</span>';
+    return '<span class="produto__orcamento">sob orçamento</span>';
+  }
+
+  // Linha de preço das listas (cardápio, datas especiais, tabela de tamanhos)
+  function linhaPreco(preco) {
+    if (!mostraPrecos()) return '';
+    return '<i></i><span>' + (preco || '') + '</span>';
+  }
+
   // Escapa texto que vai dentro de atributo HTML
   function attr(txt) {
     return String(txt == null ? '' : txt)
@@ -187,7 +206,7 @@
       if (t) t.innerHTML = trilhaHTML;
     });
 
-    // Logo: se não existir o arquivo, mostra o monograma
+    // Logo: se o arquivo não existir, mostra o monograma
     var logo = $('#marcaLogo');
     var mono = $('#marcaMono');
     if (logo) {
@@ -198,12 +217,58 @@
       });
     }
 
+    /* Logo oficial: basta salvar o arquivo na pasta assets/logo/ que o site
+       troca sozinho, sem editar código nenhum.
+         assets/logo/logo-andrades.png        → cabeçalho (fundo claro)
+         assets/logo/logo-andrades-claro.png  → rodapé (fundo escuro)
+         assets/logo/logo-andrades-icone.png  → ícone ao salvar no celular */
+    function existeImagem(src) {
+      return new Promise(function (resolve) {
+        var teste = new Image();
+        teste.onload = function () { resolve(true); };
+        teste.onerror = function () { resolve(false); };
+        teste.src = src;
+      });
+    }
+    existeImagem('assets/logo/logo-andrades.png').then(function (temLogo) {
+      if (temLogo) {
+        $$('.site-header .marca__logo').forEach(function (el) { el.hidden = false; el.src = 'assets/logo/logo-andrades.png'; });
+      }
+      return existeImagem('assets/logo/logo-andrades-claro.png');
+    }).then(function (temClara) {
+      if (temClara) $$('.rodape .marca__logo').forEach(function (el) { el.src = 'assets/logo/logo-andrades-claro.png'; });
+      return existeImagem('assets/logo/logo-andrades-icone.png');
+    }).then(function (temIcone) {
+      if (!temIcone) return;
+      var icone = $('link[rel="apple-touch-icon"]');
+      if (icone) icone.setAttribute('href', 'assets/logo/logo-andrades-icone.png');
+    });
+
     // Horários no rodapé de dados estruturados já estão no HTML estático
   }
 
   /* ======================================================================
      CARDÁPIO
      ====================================================================== */
+
+  // Aviso "os valores variam" — aparece quando os preços estão ocultos
+  function renderAvisoOrcamento() {
+    var box = $('#avisoPrecos');
+    if (!box || mostraPrecos()) { if (box) box.hidden = true; return; }
+
+    var txt = CFG.avisoOrcamento || 'Os valores variam conforme tamanho, massa, recheio e acabamento — fale com a gente para receber o orçamento.';
+    box.innerHTML =
+      '<span class="aviso-precos__icone" aria-hidden="true">' +
+        '<svg width="17" height="17"><use href="#i-wa"/></svg>' +
+      '</span>' +
+      '<p>' + txt + '</p>' +
+      '<a class="aviso-precos__link" href="' + linkWhatsApp(CFG.whatsapp.mensagemOrcamento) + '" ' +
+        'target="_blank" rel="noopener">Pedir orçamento' +
+        '<svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg>' +
+      '</a>';
+    box.hidden = false;
+  }
+
   var estado = { categoria: 'todos' };
 
   function renderFiltros() {
@@ -242,8 +307,9 @@
         ? imgTag(p.img, p.nome)
         : midiaPlaceholder('foto a caminho');
 
-      var msgPedido = 'Olá! Quero encomendar: ' + p.nome + (p.preco ? ' (' + p.preco + ')' : '') +
-                      '. Estou pensando para o dia ____. Podem me confirmar a disponibilidade?';
+      var msgPedido = 'Olá! Quero encomendar: ' + p.nome +
+                      (!mostraPrecos() || !p.preco ? '' : ' (' + p.preco + ')') +
+                      '. Estou pensando para o dia ____. Podem me passar o orçamento?';
 
       return '' +
         '<article class="produto" data-cat="' + p.categoria + '">' +
@@ -253,7 +319,7 @@
           '<div class="produto__corpo">' +
             '<h3 class="produto__linha">' +
               '<span class="produto__nome">' + p.nome + '</span>' +
-              '<span class="produto__preco">' + (p.preco || '') + '</span>' +
+              precoOuOrcamento(p.preco) +
             '</h3>' +
             '<p class="produto__desc">' + (p.descricao || '') + '</p>' +
             '<div class="produto__detalhe">' +
@@ -273,7 +339,7 @@
     var lista = $('#outrosSabores');
     if (!lista || !DADOS.outros) return;
     lista.innerHTML = DADOS.outros.map(function (o) {
-      return '<div class="outros__item"><b>' + o.nome + '</b><i></i><span>' + o.preco + '</span></div>';
+      return '<div class="outros__item"><b>' + o.nome + '</b>' + linhaPreco(o.preco) + '</div>';
     }).join('');
   }
 
@@ -312,8 +378,8 @@
           '<div class="painel__texto">' +
             '<h3>' + s.titulo + '</h3>' +
             '<p>' + s.chamada + '</p>' +
-            '<ul class="lista-precos">' + (s.itens || []).map(function (it) {
-              return '<li><b>' + it.nome + '</b><i></i><span>' + it.preco + '</span></li>';
+            '<ul class="lista-precos' + (mostraPrecos() ? '' : ' sem-preco') + '">' + (s.itens || []).map(function (it) {
+              return '<li><b>' + it.nome + '</b>' + linhaPreco(it.preco) + '</li>';
             }).join('') + '</ul>' +
             (s.obs ? '<p class="painel__obs">' + s.obs + '</p>' : '') +
             '<div class="painel__acoes">' +
@@ -838,7 +904,7 @@
           (d.texto ? '<p class="lead" style="margin-top:.9rem;max-width:36rem">' + d.texto + '</p>' : '') +
           '<div class="destaque__rodape">' +
             '<div class="destaque__preco">' +
-              '<b>' + (d.preco || '') + '</b>' +
+              '<b>' + (mostraPrecos() ? (d.preco || '') : 'Sob orçamento') + '</b>' +
               (d.detalhe ? '<span>' + d.detalhe + '</span>' : '') +
             '</div>' +
             '<a class="btn btn--wa" href="#" data-wa data-wa-msg="' + attr(msg) + '">' +
@@ -884,8 +950,9 @@
     var tamanhos = $('#festaTamanhos');
     if (tamanhos && f.tamanhos) {
       tamanhos.innerHTML = f.tamanhos.map(function (t) {
-        return '<li><b>' + t.aro + '<small>' + t.fatias + '</small></b><i></i><span>' + t.preco + '</span></li>';
+        return '<li><b>' + t.aro + '<small>' + t.fatias + '</small></b>' + linhaPreco(t.preco) + '</li>';
       }).join('');
+      if (!mostraPrecos()) tamanhos.classList.add('sem-preco');
     }
 
     // O que vem incluso (lista numerada)
@@ -907,6 +974,10 @@
       }).join('');
       $$('img', galeria).forEach(comFallbackDeImagem);
     }
+
+    // Nota da tabela de tamanhos (reforça que o valor varia)
+    var notaTam = $('#festaNota');
+    if (notaTam && f.notaTamanhos) notaTam.textContent = f.notaTamanhos;
 
     // Regras rápidas
     var regras = $('#festaRegras');
@@ -978,6 +1049,7 @@
      ====================================================================== */
   function iniciar() {
     aplicarIdentidade();
+    renderAvisoOrcamento();
     renderFiltros();
     renderProdutos();
     renderOutros();

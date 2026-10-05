@@ -14,6 +14,14 @@ window.ANDRADES = {
   uf: 'RJ',
   slogan: 'Feito à mão, com o tempo que o doce pede.',
 
+  /* ---- Preços no site --------------------------------------------------
+     false = NÃO mostra preço em nenhum lugar (decisão do cliente):
+             cada item mostra "sob orçamento", e o site explica que o valor
+             varia conforme tamanho, massa, recheio e acabamento.
+     true  = volta a mostrar os preços cadastrados em js/menu-data.js.
+     --------------------------------------------------------------------- */
+  mostrarPrecos: false,
+
   /* ---- Feito sob medida -----------------------------------------------
      A casa faz bolos 100% personalizados: qualquer tamanho, massa e recheio.
      Este texto aparece na abertura e nas seções de bolo.
@@ -46,6 +54,10 @@ window.ANDRADES = {
   pagamentos: ['Pix', 'Dinheiro', 'Cartão de débito', 'Cartão de crédito'],
   // >>> CONFIRMAR: pedimos sinal para reservar a data de bolos de festa?
   sinal: 'Sinal de 50% para reservar a data do bolo de festa (o restante na entrega).',
+
+  /* ---- Texto do aviso sobre orçamento (aparece no cardápio) ----------- */
+  avisoOrcamento:
+    'Os valores variam conforme tamanho, massa, recheio e acabamento. Diga o que você quer — a gente responde com o orçamento e o esboço, sem compromisso.',
 
   /* ---- WhatsApp (formato internacional, só números) -------------------- */
   whatsapp: {

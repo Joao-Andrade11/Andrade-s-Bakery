@@ -12,6 +12,12 @@
      deixa claro que a foto está por vir).
    • `tags`: 'mais-pedido' | 'novo' | 'sem-lactose' | 'vegano' | 'data-especial'
 
+   💡 OS PREÇOS NÃO APARECEM NO SITE (decisão do cliente). Cada item mostra
+      "sob orçamento" e o cardápio explica que o valor varia conforme tamanho,
+      massa, recheio e acabamento. Os valores abaixo continuam cadastrados e
+      estão prontos: para exibi-los, basta trocar `mostrarPrecos` para true em
+      js/config.js. Nada mais precisa ser feito.
+
    ⚠️ PENDÊNCIAS MARCADAS COM >>> no arquivo:
       • preços (todos são de exemplo)
       • depoimentos (os textos são de exemplo)
@@ -50,9 +56,9 @@ window.CARDAPIO = {
       { aro: 'Aro 20 cm', fatias: '16 a 20 fatias', preco: 'a partir de R$ 189,90' },
       { aro: 'Aro 25 cm', fatias: '28 a 35 fatias', preco: 'a partir de R$ 269,90' },
       { aro: 'Aro 30 cm', fatias: '45 a 55 fatias', preco: 'a partir de R$ 359,90' },
-      { aro: 'Dois andares', fatias: '70 fatias ou mais', preco: 'orçamento no WhatsApp' },
       { aro: 'Outro tamanho', fatias: 'você escolhe — nós fazemos', preco: 'orçamento no WhatsApp' }
     ],
+    notaTamanhos: 'Fazemos qualquer tamanho. Os valores variam conforme tamanho, massa, recheio e acabamento — peça o orçamento no WhatsApp, sem compromisso.',
 
     incluso: [
       { titulo: 'Sob medida de verdade', texto: 'Qualquer tamanho, qualquer massa, qualquer recheio. Você diz o que quer e a gente faz exatamente assim.' },
@@ -75,7 +81,7 @@ window.CARDAPIO = {
 
     regras: [
       'Bolos de festa: 5 a 7 dias de antecedência.',
-      'Temas com personagem, escultura ou dois andares: 1 mês.',
+      'Temas com personagem, escultura ou muita aplicação: 1 mês.',
       'Datas de fim de semana e véspera de feriado fecham primeiro.',
       'Reserva confirmada com sinal de 50%.'   // >>> CONFIRMAR se pede sinal
     ],
@@ -172,17 +178,6 @@ window.CARDAPIO = {
       img: 'assets/img/bolo-cenoura.jpg',
       tags: []
     },
-    {
-      id: 'bolo-dois-andares',
-      nome: 'Bolo de Dois Andares',
-      categoria: 'bolos',
-      descricao: 'Para festa cheia: dois andares combinando tema, cores e topo personalizado. Montagem e estrutura feitas para viajar até você.',
-      preco: 'a partir de R$ 349,90',   // >>> CONFIRMAR
-      detalhe: '70 fatias ou mais · 1 mês de antecedência',
-      img: null,                        // >>> enviar foto de um bolo de dois andares
-      tags: []
-    },
-
     /* ============ DOCES & SOBREMESAS (aguardando fotos) ============ */
     {
       id: 'mesa-doces',
@@ -365,7 +360,7 @@ window.CARDAPIO = {
       prazo: 'Reserve com 5 a 7 dias · temas complexos, 1 mês',
       itens: [
         { nome: 'Bolo temático com aplicação e topo personalizado', preco: 'a partir de R$ 189,90' },
-        { nome: 'Bolo de dois andares', preco: 'a partir de R$ 349,90' },
+        { nome: 'Bolo com tema de personagem (papel de arroz)', preco: 'R$ 199,90' },
         { nome: 'Mesa de doces completa', preco: 'a partir de R$ 259,90' },
         { nome: 'Kit festa: bolo + 100 salgados + 100 doces', preco: 'a partir de R$ 549,90' }
       ],
@@ -430,7 +425,7 @@ window.CARDAPIO = {
   faq: [
     {
       q: 'Com quanto tempo preciso encomendar o bolo de festa?',
-      a: 'Bolos de festa pedem 5 a 7 dias de antecedência. Temas com personagem, escultura ou dois andares precisam de 1 mês, porque envolvem esboço, aprovação e estrutura. Datas de fim de semana e véspera de feriado fecham primeiro — se a data é importante, reserve assim que decidir.'
+      a: 'Bolos de festa pedem 5 a 7 dias de antecedência. Temas com personagem, escultura ou muita aplicação precisam de 1 mês, porque envolvem esboço, aprovação e estrutura. Datas de fim de semana e véspera de feriado fecham primeiro — se a data é importante, reserve assim que decidir.'
     },
     {
       q: 'Vocês fazem bolo de qualquer tamanho, massa e recheio?',
@@ -438,7 +433,7 @@ window.CARDAPIO = {
     },
     {
       q: 'Qual tamanho de bolo para a minha quantidade de convidados?',
-      a: 'Como referência: aro 15 serve até 12 fatias · aro 20, de 16 a 20 fatias · aro 25, de 28 a 35 · aro 30, de 45 a 55 · dois andares, 70 ou mais. Mas a tabela é só um guia — fazemos o tamanho que você precisar. Diga o número de convidados no WhatsApp que a gente indica o tamanho certo, sem cobrar a mais por isso.'
+      a: 'Como referência: aro 15 serve até 12 fatias · aro 20, de 16 a 20 fatias · aro 25, de 28 a 35 · aro 30, de 45 a 55. Mas a tabela é só um guia — fazemos o tamanho que você precisar (e, para festas maiores, montamos a mesa com mais de um bolo). Diga o número de convidados no WhatsApp que a gente indica o tamanho certo, sem cobrar a mais por isso.'
     },
     {
       q: 'Como funciona o bolo personalizado com tema?',
@@ -447,6 +442,10 @@ window.CARDAPIO = {
     {
       q: 'Vocês entregam? Até onde?',
       a: 'Atendemos São Gonçalo e Niterói inteiros. A taxa e o horário da entrega são combinados no WhatsApp conforme o endereço, a data e o tamanho do pedido. Bolos de festa viajam refrigerados. A retirada no local também é possível, no horário combinado.'
+    },
+    {
+      q: 'Por que o site não mostra os preços?',
+      a: 'Porque o valor do bolo depende de coisas que só você sabe: o tamanho (quantos convidados), a massa, o recheio, o acabamento e o tempo de decoração (flores aplicadas, escrita à mão, tema). Em vez de dar um número que não serve para ninguém, preferimos te passar o valor certo do seu bolo: manda o que você quer — tema, data e quantos convidados — e respondemos com o orçamento, normalmente no mesmo dia. Sem compromisso e sem enrolação.'
     },
     {
       q: 'Como funciona o pagamento e a reserva da data?',

@@ -1972,3 +1972,74 @@ p { text-wrap: pretty; }
   .festa__galeria { gap: .6rem; }
   .festa__item figcaption { padding: 1.2rem .7rem .7rem; }
 }
+
+
+/* ==========================================================================
+   21. PREÇOS OCULTOS (config.mostrarPrecos = false)
+   Nada de preço no site: cada item mostra "sob orçamento" e um aviso explica
+   que o valor varia conforme tamanho, massa, recheio e acabamento.
+   ========================================================================== */
+
+/* Rótulo no lugar do preço, nos cards do cardápio */
+.produto__orcamento {
+  order: 2;
+  font-family: var(--f-text);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  white-space: nowrap;
+  padding-bottom: .1rem;
+}
+.produto:hover .produto__orcamento { color: var(--cocoa); }
+
+/* Listas sem preço: a linha pontilhada perde a função e sai de cena */
+.lista-precos.sem-preco li i,
+.outros__item i:only-of-type { display: none; }
+.lista-precos.sem-preco li { justify-content: flex-start; }
+.outros__item.sem-preco { justify-content: flex-start; }
+
+/* Faixa de aviso sobre o orçamento */
+.aviso-precos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cocoa);
+  border-radius: var(--r-sm);
+  background: linear-gradient(90deg, rgba(122,70,42,.06), rgba(122,70,42,.01));
+}
+.aviso-precos[hidden] { display: none; }
+.aviso-precos__icone {
+  flex: none;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--cocoa);
+  color: var(--paper);
+}
+.aviso-precos p {
+  flex: 1 1 22rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.aviso-precos__link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--cocoa);
+  white-space: nowrap;
+  transition: gap .3s var(--ease);
+}
+.aviso-precos__link:hover { gap: .6rem; }
+@media (max-width: 560px) {
+  .aviso-precos { padding: .9rem 1rem; }
+  .aviso-precos__link { width: 100%; justify-content: flex-start; }
+}
