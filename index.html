@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#14100D">
+
+<!-- ==========================================================================
+     ANDRADE'S BAKERY — LANDING PAGE
+     --------------------------------------------------------------------------
+     ANTES DE PUBLICAR:
+     1. Troque o número do WhatsApp, endereço e horários em  js/config.js
+     2. Substitua as fotos de /assets/img pelas fotos reais da confeitaria
+        (as atuais são imagens de demonstração para montar o layout)
+     3. Troque os depoimentos em js/menu-data.js pelos feedbacks reais
+     4. Coloque a logo em /assets/logo/logo-andrades.png  (PNG transparente)
+     5. Ajuste preços em js/menu-data.js — os valores atuais são de exemplo
+     Dúvidas de onde mexer? Está tudo comentado nos próprios arquivos.
+     ========================================================================== -->
+
+<title>Andrade's Bakery — Bolos e doces artesanais em Itaboraí/RJ</title>
+<meta name="description" content="Confeitaria artesanal em Itaboraí/RJ. Bolos, doces finos, salgados assados e encomendas personalizadas para aniversários, Páscoa, Dia das Mães e Dia dos Namorados. Peça pelo WhatsApp.">
+<meta name="author" content="Andrade's Bakery">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://andradesbakery.com.br/">
+
+<!-- Compartilhamento em redes sociais -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Andrade's Bakery">
+<meta property="og:title" content="Andrade's Bakery — Bolos e doces feitos à mão em Itaboraí/RJ">
+<meta property="og:description" content="Bolos, doces finos, salgados assados e kits café da manhã por encomenda. Datas especiais: Páscoa, Dia das Mães, Dia dos Namorados e aniversários.">
+<meta property="og:image" content="https://andradesbakery.com.br/assets/img/hero-bolo.jpg">
+<meta property="og:url" content="https://andradesbakery.com.br/">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Ícones -->
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/logo/logo-andrades-icone.png">
+
+<!-- Fontes auto-hospedadas (nenhuma conexão externa) -->
+<link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Dados estruturados para o Google (ficha da confeitaria) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Andrade's Bakery",
+  "description": "Confeitaria artesanal com bolos, doces finos, salgados assados e encomendas personalizadas para datas especiais.",
+  "image": "https://andradesbakery.com.br/assets/img/hero-bolo.jpg",
+  "url": "https://andradesbakery.com.br/",
+  "telephone": "+5521990726282",
+  "priceRange": "R$",
+  "servesCuisine": ["Confeitaria", "Bolos", "Doces", "Salgados"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Itaboraí",
+    "addressRegion": "RJ",
+    "addressCountry": "BR"
+  },
+  "areaServed": "Itaboraí e região — RJ",
+  "sameAs": ["https://www.instagram.com/andrades.bakery"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "17:00" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Cardápio Andrade's Bakery",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Bolo de Chocolate Belga" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Bolo Ninho com Morango" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Caixa de Doces Finos" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Salgados Assados" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Kit Café da Manhã" } }
+    ]
+  }
+}
+</script>
+</head>
+
+<body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+<!-- ======================================================================
+     ÍCONES (sprite SVG embutido — nenhuma biblioteca externa)
+     ====================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-wa" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="3" width="18" height="18" rx="5.2" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="12" cy="12" r="3.9" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none">
+      <path d="M20 6.5 9.6 17 4.5 12" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none">
+      <path d="M5 12h13m-5.5-5.5L18 12l-5.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-arrow-l" viewBox="0 0 24 24" fill="none">
+      <path d="M19 12H6m5.5-5.5L6 12l5.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M8.6 6.4c0-.85.93-1.37 1.65-.93l7.2 4.42c.7.43.7 1.44 0 1.87l-7.2 4.42c-.72.44-1.65-.08-1.65-.93z"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="8.6" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M12 7.4V12l3.2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none">
+      <path d="M12 21s6.7-5.4 6.7-10.4A6.7 6.7 0 0 0 5.3 10.6C5.3 15.6 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="12" cy="10.4" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none">
+      <rect x="2.8" y="5.5" width="18.4" height="13" rx="2.6" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M2.8 10h18.4" stroke="currentColor" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24" fill="none">
+      <path d="M2.8 16.4V7.2c0-.6.5-1 1-1h9.4c.6 0 1 .4 1 1v9.2M14.2 9.6h3.4c.3 0 .6.15.8.4l2.4 3c.15.2.24.44.24.7v2.7c0 .5-.4 1-1 1h-2M2.8 16.4c0 .6.45 1 1 1h1.6M14.2 16.4c0 .6-.44 1-1 1H9.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="6.6" cy="17.9" r="1.9" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="17.4" cy="17.9" r="1.9" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path fill="currentColor" d="m12 3.4 2.6 5.3 5.9.86-4.25 4.14 1 5.9L12 16.8l-5.25 2.8 1-5.9L3.5 9.56l5.9-.86z"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none">
+      <path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24" fill="none">
+      <path d="M4 20.4h16M4.9 20.4v-5c0-1.3 1-2.3 2.3-2.3h9.6c1.3 0 2.3 1 2.3 2.3v5M7.6 13.1v-2.4c0-1 .8-1.9 1.9-1.9h5c1 0 1.9.8 1.9 1.9v2.4M12 8.8V6.2m0-2.4v.02" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M12 3.8c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ======================================================================
+     AVISO DO TOPO
+     ====================================================================== -->
+<div class="aviso" id="avisoTopo" role="status">
+  <span id="avisoTexto"></span>
+  <a href="#" data-wa="" data-wa-msg="Olá! Vi o site e queria saber a disponibilidade da agenda para encomendas.">Falar agora</a>
+  <button class="aviso__x" type="button" aria-label="Fechar aviso" id="avisoFechar">
+    <svg width="13" height="13" aria-hidden="true"><use href="#i-close"/></svg>
+  </button>
+</div>
+
+<!-- ======================================================================
+     CABEÇALHO
+     ====================================================================== -->
+<header class="site-header" id="cabecalho">
+  <div class="wrap header-in">
+    <a class="marca" href="#inicio" aria-label="Andrade's Bakery — início">
+      <img class="marca__logo" id="marcaLogo" src="assets/logo/logo-andrades.png" alt="Logo Andrade's Bakery" hidden>
+      <span class="marca__mono" id="marcaMono" aria-hidden="true">AB</span>
+      <span class="marca__texto">
+        <span class="marca__nome">Andrade's Bakery</span>
+        <span class="marca__sub">Confeitaria artesanal</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#datas">Datas especiais</a>
+      <a href="#videos">Vídeos</a>
+      <a href="#depoimentos">Feedbacks</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#encomendar">Contato</a>
+    </nav>
+
+    <div class="header-cta">
+      <a class="btn btn--wa btn--sm only-desktop" href="#" data-wa="">
+        <svg width="17" height="17" aria-hidden="true"><use href="#i-wa"/></svg>
+        Encomendar
+      </a>
+      <button class="burger" type="button" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer__top">
+    <span class="hand">Feito na hora, pra você</span>
+    <button class="drawer__x" type="button" id="drawerFechar" aria-label="Fechar menu">
+      <svg width="16" height="16" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Navegação mobile">
+    <a href="#cardapio"><i>01</i> Cardápio</a>
+    <a href="#datas"><i>02</i> Datas especiais</a>
+    <a href="#videos"><i>03</i> Vídeos</a>
+    <a href="#depoimentos"><i>04</i> Feedbacks</a>
+    <a href="#sobre"><i>05</i> Sobre nós</a>
+    <a href="#encomendar"><i>06</i> Encomendar</a>
+  </nav>
+  <div class="drawer__foot">
+    <a class="btn btn--wa btn--block" href="#" data-wa="">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-wa"/></svg>
+      Encomendar pelo WhatsApp
+    </a>
+    <div class="drawer__social">
+      <a href="https://www.instagram.com/andrades.bakery" target="_blank" rel="noopener">Instagram</a>
+      <span id="drawerHorario"></span>
+    </div>
+  </div>
+</div>
+
+<main id="conteudo">
+
+<!-- ======================================================================
+     HERO
+     ====================================================================== -->
+<section class="hero" id="inicio">
+  <span class="hero__marca-dagua" aria-hidden="true">Andrade's</span>
+  <div class="wrap hero__in">
+    <div class="hero__texto" data-rev>
+      <span class="eyebrow">Confeitaria artesanal · Itaboraí, RJ</span>
+      <h1 class="h-xl">Bolo de verdade, <em>feito à mão</em> e no tempo certo.</h1>
+      <p class="hero__sub">
+        Brigadeiro mexido na panela, morango fresco e massa assada no dia da entrega.
+        Encomende para aniversários, datas especiais — ou só porque hoje merece um doce melhor.
+      </p>
+
+      <div class="hero__acoes">
+        <a class="btn btn--wa btn--lg" href="#" data-wa="">
+          <svg width="19" height="19" aria-hidden="true"><use href="#i-wa"/></svg>
+          Encomendar pelo WhatsApp
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#cardapio">
+          Ver o cardápio
+          <svg class="arrow" width="17" height="17" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+
+      <ul class="hero__prova">
+        <li>
+          <svg width="17" height="17" aria-hidden="true"><use href="#i-clock"/></svg>
+          <span><b>Encomendas em 48h</b><span>5 a 7 dias nas datas comemorativas</span></span>
+        </li>
+        <li>
+          <svg width="17" height="17" aria-hidden="true"><use href="#i-truck"/></svg>
+          <span><b>Entrega e retirada</b><span>Atendemos Itaboraí e região</span></span>
+        </li>
+        <li>
+          <svg width="17" height="17" aria-hidden="true"><use href="#i-cake"/></svg>
+          <span><b>Receita de família</b><span>Nada de mistura pronta ou congelado</span></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="colagem" data-rev style="--delay:120ms">
+      <div class="colagem__principal">
+        <img src="assets/img/hero-bolo.jpg" alt="Bolo de chocolate em camadas com ganache e flor de sal" width="1024" height="1536" fetchpriority="high" decoding="async">
+      </div>
+      <div class="colagem__secundaria">
+        <img src="assets/img/hero-detalhe.jpg" alt="Mãos aplicando bico de confeiteiro em bolo red velvet" width="1024" height="1536" loading="lazy" decoding="async">
+      </div>
+      <div class="colagem__selo">
+        <span>Feito à mão<em>todo dia</em></span>
+      </div>
+      <p class="colagem__nota hand">O morango chega fresco na segunda de manhã.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     FAIXA ANIMADA
+     ====================================================================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__trilha" id="marqueeTrilha"></div>
+  <div class="marquee__trilha" id="marqueeTrilha2"></div>
+</div>
+
+<!-- ======================================================================
+     CARDÁPIO
+     ====================================================================== -->
+<section class="sec sec--paper" id="cardapio">
+  <div class="wrap">
+    <div class="cardapio__topo">
+      <div class="sec-head" style="margin-bottom:0" data-rev>
+        <span class="eyebrow">Cardápio</span>
+        <h2 class="h-l">O que sai da nossa cozinha</h2>
+        <p class="lead">
+          Tudo é produzido por encomenda, então você recebe fresco.
+          Escolha um item e o pedido já vai pronto no WhatsApp.
+        </p>
+      </div>
+      <a class="btn btn--ghost" href="#" data-wa="" data-wa-msg="Olá! Queria montar uma encomenda. Pode me ajudar?" data-rev style="--delay:100ms">
+        Montar encomenda
+        <svg class="arrow" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg>
+      </a>
+    </div>
+
+    <div class="filtros" role="group" aria-label="Filtrar o cardápio por categoria" id="filtros" data-rev></div>
+    <div class="grade" id="gradeProdutos"></div>
+
+    <div class="outros" data-rev>
+      <div class="outros__cabeca">
+        <div>
+          <h3>Outros sabores do cardápio</h3>
+          <p class="produto__desc">Também fazemos — só ainda não temos foto destes aqui no site.</p>
+        </div>
+        <a class="produto__pedir" href="#" data-wa="" data-wa-msg="Olá! Queria saber sobre os sabores que não estão com foto no site.">
+          Perguntar disponibilidade
+          <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+      <div class="outros__lista" id="outrosSabores"></div>
+    </div>
+
+    <noscript>
+      <p class="lead" style="margin-top:2rem">
+        Para ver o cardápio completo com fotos e preços, ative o JavaScript ou
+        <a href="https://wa.me/5521990726282" target="_blank" rel="noopener"><b>fale com a gente no WhatsApp</b></a>.
+      </p>
+    </noscript>
+  </div>
+</section>
+
+<!-- ======================================================================
+     DATAS ESPECIAIS
+     ====================================================================== -->
+<section class="sec sazonais" id="datas">
+  <div class="wrap">
+    <div class="sec-head" data-rev>
+      <span class="eyebrow">Datas especiais</span>
+      <h2 class="h-l">Cada data do ano tem a sua própria produção</h2>
+      <p class="lead" style="color:rgba(248,243,234,.72)">
+        Páscoa, Dia das Mães, Dia dos Namorados e aniversários têm agenda limitada e
+        prazo próprio. Escolha a ocasião e veja o que preparamos nesse período.
+      </p>
+    </div>
+
+    <div class="abas" role="tablist" aria-label="Datas especiais" id="abasSazonais" data-rev></div>
+    <div id="paineisSazonais"></div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     VÍDEOS
+     ====================================================================== -->
+<section class="sec sec--cream" id="videos">
+  <div class="wrap">
+    <div class="sec-head" data-rev>
+      <span class="eyebrow">Vídeos</span>
+      <h2 class="h-l">Por dentro da nossa cozinha</h2>
+      <p class="lead">
+        Corte do bolo, pão saindo do forno, montagem de mesa de festa.
+        Clique para assistir aqui mesmo — ou veja tudo no
+        <a href="https://www.instagram.com/andrades.bakery" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px">Instagram</a>.
+      </p>
+    </div>
+    <div class="videos__grade" id="gradeVideos" data-rev></div>
+    <p class="produto__desc" style="margin-top:1.25rem">
+      Espaço reservado para os vídeos da confeitaria: basta salvar o arquivo em
+      <code>assets/video/</code> e apontar o nome dele em <code>js/menu-data.js</code>.
+    </p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     DEPOIMENTOS
+     ====================================================================== -->
+<section class="sec sec--paper" id="depoimentos">
+  <div class="wrap">
+    <div class="sec-head" data-rev>
+      <span class="eyebrow">Feedbacks</span>
+      <h2 class="h-l">Quem já provou, volta</h2>
+    </div>
+
+    <div class="depo__palco" data-rev>
+      <div class="depo__trilha" id="depoTrilha" aria-live="polite"></div>
+      <div class="depo__controles">
+        <div class="bolinhas" id="depoBolinhas" role="group" aria-label="Escolher depoimento"></div>
+        <div class="setas">
+          <button class="seta" type="button" id="depoAnterior" aria-label="Depoimento anterior">
+            <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow-l"/></svg>
+          </button>
+          <button class="seta" type="button" id="depoProximo" aria-label="Próximo depoimento">
+            <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="depo__fontes" data-rev>
+      <span><b>Feedbacks reais</b> enviados por clientes</span>
+      <span>Instagram <a href="https://www.instagram.com/andrades.bakery" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px">@andrades.bakery</a></span>
+      <span>Avaliações no WhatsApp</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     SOBRE + PROCESSO
+     ====================================================================== -->
+<section class="sec sec--cream" id="sobre">
+  <div class="wrap">
+    <div class="sobre__in">
+      <div class="sobre__midia" data-rev>
+        <div class="photo">
+          <img src="assets/img/mesa-completa.jpg" alt="Mesa com bolo, salgados assados, brigadeiros e pão artesanal" width="1500" height="1000" loading="lazy" decoding="async">
+        </div>
+        <div class="sobre__carimbo">
+          <span>Produção<em>por encomenda</em>nada de vitrine</span>
+        </div>
+      </div>
+
+      <div data-rev style="--delay:120ms">
+        <span class="eyebrow">Quem faz</span>
+        <h2 class="h-l">Uma confeitaria de família, com receita de caderno</h2>
+        <p class="lead" style="margin-top:1.15rem">
+          A Andrade's Bakery nasceu na cozinha de casa, testando receita por receita até chegar
+          no ponto que a gente queria servir para a própria família. Hoje somos uma confeitaria
+          pequena e artesanal — e é de propósito: assim dá tempo de cuidar de cada bolo como se
+          fosse o nosso.
+        </p>
+
+        <ul class="lista-check">
+          <li>
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg>
+            <span><b>Ingredientes de verdade.</b> Chocolate nobre, manteiga, leite condensado e fruta fresca. Sem mistura pronta.</span>
+          </li>
+          <li>
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg>
+            <span><b>Produzido no dia.</b> Trabalhamos por encomenda para nada sair de geladeira de véspera.</span>
+          </li>
+          <li>
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg>
+            <span><b>Você fala com quem faz.</b> Do orçamento à entrega, o atendimento é direto com a nossa equipe.</span>
+          </li>
+        </ul>
+
+        <p class="assinatura">Com carinho, família Andrade</p>
+      </div>
+    </div>
+
+    <div class="processo">
+      <div class="sec-head" data-rev>
+        <span class="eyebrow">Como funciona</span>
+        <h2 class="h-m">Do pedido até a sua mesa, em quatro passos</h2>
+      </div>
+      <div class="passos">
+        <div class="passo" data-rev>
+          <h4>Você escolhe e chama</h4>
+          <p>Manda o item, a data e quantas pessoas vão comer — pelo WhatsApp, sem formulário chato.</p>
+        </div>
+        <div class="passo" data-rev style="--delay:80ms">
+          <h4>A gente confirma</h4>
+          <p>Respondemos com valor, prazo e as opções de sabor. Fechando, o pedido entra na agenda.</p>
+        </div>
+        <div class="passo" data-rev style="--delay:160ms">
+          <h4>Produção no dia</h4>
+          <p>Assamos e montamos na data combinada, com foto do resultado antes de embalar, se quiser.</p>
+        </div>
+        <div class="passo" data-rev style="--delay:240ms">
+          <h4>Entrega ou retirada</h4>
+          <p>Entregamos em Itaboraí e região, ou você retira aqui — com um café por nossa conta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     PERGUNTAS FREQUENTES
+     ====================================================================== -->
+<section class="sec sec--paper" id="faq">
+  <div class="wrap wrap--narrow">
+    <div class="sec-head" data-rev>
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2 class="h-l">Antes de encomendar</h2>
+    </div>
+
+    <div class="faq" id="faqLista" data-rev></div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     ENCOMENDA + CONTATO
+     ====================================================================== -->
+<section class="sec pedido" id="encomendar">
+  <div class="wrap">
+    <div class="pedido__in">
+      <div data-rev>
+        <span class="eyebrow">Faça sua encomenda</span>
+        <h2 class="h-l" style="color:#fff">Manda o pedido que a gente confirma rapidinho</h2>
+        <p class="lead" style="color:rgba(248,243,234,.72);margin-top:1rem;max-width:34rem">
+          Preencha o essencial e o botão abre o WhatsApp com a mensagem já escrita.
+          Nada de cadastro, nada de espera.
+        </p>
+
+        <div class="contato" style="margin-top:2.25rem">
+          <a class="contato__cartao" href="#" data-wa="" data-wa-msg="Olá! Queria fazer uma encomenda.">
+            <span class="contato__icone"><svg width="21" height="21" aria-hidden="true"><use href="#i-wa"/></svg></span>
+            <span>
+              <b>WhatsApp</b>
+              <strong id="contatoNumero">—</strong>
+              <p>Atendemos de seg a sáb, no horário de funcionamento.</p>
+            </span>
+          </a>
+
+          <div class="contato__cartao">
+            <span class="contato__icone"><svg width="21" height="21" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <span>
+              <b>Horários</b>
+              <strong id="contatoHorario">—</strong>
+              <p id="contatoHorarioDetalhe">—</p>
+            </span>
+          </div>
+
+          <div class="contato__cartao">
+            <span class="contato__icone"><svg width="21" height="21" aria-hidden="true"><use href="#i-truck"/></svg></span>
+            <span>
+              <b>Entrega e retirada</b>
+              <strong id="contatoEntrega">—</strong>
+              <p>Taxa de entrega combinada no WhatsApp conforme o endereço.</p>
+            </span>
+          </div>
+
+          <div class="contato__cartao">
+            <span class="contato__icone"><svg width="21" height="21" aria-hidden="true"><use href="#i-card"/></svg></span>
+            <span>
+              <b>Formas de pagamento</b>
+              <strong id="contatoPagamento">—</strong>
+              <p>Encomendas maiores: sinal de 50% para reservar a data.</p>
+            </span>
+          </div>
+
+          <a class="contato__cartao" href="https://www.instagram.com/andrades.bakery" target="_blank" rel="noopener">
+            <span class="contato__icone"><svg width="21" height="21" aria-hidden="true"><use href="#i-ig"/></svg></span>
+            <span>
+              <b>Instagram</b>
+              <strong>@andrades.bakery</strong>
+              <p>Fotos do dia a dia, novidades e enquetes de sabor.</p>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Formulário que monta a mensagem do WhatsApp -->
+      <form class="form" id="formEncomenda" data-rev style="--delay:120ms" novalidate>
+        <div class="form__head">
+          <h3>Monte sua encomenda</h3>
+          <p>Preencha e envie — abre direto no WhatsApp com tudo escrito.</p>
+        </div>
+
+        <div class="campos">
+          <div class="campo campo--full">
+            <label for="f-nome">Seu nome</label>
+            <input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Como podemos te chamar?" required>
+          </div>
+
+          <div class="campo">
+            <label for="f-tipo">O que você quer encomendar?</label>
+            <select id="f-tipo" name="tipo" required>
+              <option value="">Escolha uma opção</option>
+              <option>Bolo (aniversário, mesa de festa)</option>
+              <option>Doces finos / brigadeiros</option>
+              <option>Salgados assados</option>
+              <option>Pão de queijo / pães</option>
+              <option>Kit café da manhã</option>
+              <option>Páscoa</option>
+              <option>Dia das Mães</option>
+              <option>Dia dos Namorados</option>
+              <option>Aniversário temático</option>
+              <option>Outro / não sei ainda</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="f-data">Para quando?</label>
+            <input id="f-data" name="data" type="date" required>
+            <span class="campo__dica">Bolos e doces: 48h. Datas comemorativas: 5 a 7 dias.</span>
+          </div>
+
+          <div class="campo">
+            <label for="f-pessoas">Quantas pessoas / quantidade</label>
+            <input id="f-pessoas" name="pessoas" type="text" placeholder="Ex.: 20 pessoas, ou 1 cento" required>
+          </div>
+
+          <div class="campo">
+            <label for="f-sabor">Sabor ou tema (opcional)</label>
+            <input id="f-sabor" name="sabor" type="text" placeholder="Ex.: Ninho com morango">
+          </div>
+
+          <div class="campo campo--full">
+            <label for="f-obs">Alguma observação? (opcional)</label>
+            <textarea id="f-obs" name="obs" placeholder="Restrição alimentar, endereço de entrega, tema da festa, escrever nome no bolo..."></textarea>
+          </div>
+        </div>
+
+        <p class="form__erro" id="formErro" role="alert"></p>
+
+        <div class="form__acoes">
+          <button class="btn btn--wa btn--lg btn--block" type="submit">
+            <svg width="19" height="19" aria-hidden="true"><use href="#i-wa"/></svg>
+            Enviar pedido no WhatsApp
+          </button>
+          <p class="form__nota">Ao enviar, o WhatsApp abre em uma nova aba com a mensagem pronta para você conferir.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================================
+     RODAPÉ
+     ====================================================================== -->
+<footer class="rodape">
+  <div class="wrap">
+    <div class="rodape__in">
+      <div>
+        <div class="rodape__marca">
+          <span class="marca__mono" aria-hidden="true">AB</span>
+          <span class="marca__texto">
+            <span class="marca__nome">Andrade's Bakery</span>
+            <span class="marca__sub">Confeitaria artesanal</span>
+          </span>
+        </div>
+        <p class="rodape__nota">
+          Bolos, doces, salgados assados e kits café da manhã feitos por encomenda em
+          Itaboraí/RJ. Produção artesanal, sem mistura pronta e sem pressa.
+        </p>
+      </div>
+
+      <div>
+        <h4>Cardápio</h4>
+        <ul>
+          <li><a href="#cardapio">Bolos</a></li>
+          <li><a href="#cardapio">Doces &amp; sobremesas</a></li>
+          <li><a href="#cardapio">Salgados &amp; pães</a></li>
+          <li><a href="#cardapio">Kits café da manhã</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Datas especiais</h4>
+        <ul>
+          <li><a href="#datas" data-aba-alvo="pascoa">Páscoa</a></li>
+          <li><a href="#datas" data-aba-alvo="dia-das-maes">Dia das Mães</a></li>
+          <li><a href="#datas" data-aba-alvo="dia-dos-namorados">Dia dos Namorados</a></li>
+          <li><a href="#datas" data-aba-alvo="aniversarios">Aniversários</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Fale com a gente</h4>
+        <ul>
+          <li><a href="#" data-wa="">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/andrades.bakery" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#faq">Dúvidas frequentes</a></li>
+          <li><a href="#encomendar">Encomendar</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rodape__base">
+      <span>© <span id="ano">2026</span> Andrade's Bakery — todos os direitos reservados.</span>
+      <span>Feito à mão também no código ✺ <span id="rodapeCidade">Itaboraí — RJ</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Botão flutuante do WhatsApp -->
+<a class="wa-flutuante" id="waFlutuante" href="#" data-wa="" aria-label="Falar no WhatsApp">
+  <span class="wa-flutuante__icone">
+    <svg width="21" height="21" aria-hidden="true"><use href="#i-wa"/></svg>
+  </span>
+  <span class="wa-flutuante__txt">
+    <b>Encomendar agora</b>
+    <span>Resposta rápida no WhatsApp</span>
+  </span>
+</a>
+
+<!-- Lightbox de vídeo -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vídeo" hidden>
+  <div class="lightbox__caixa">
+    <button class="lightbox__x" type="button" id="lightboxFechar" aria-label="Fechar vídeo">
+      <svg width="15" height="15" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div id="lightboxMidia"></div>
+    <p class="lightbox__legenda" id="lightboxLegenda"></p>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/menu-data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
