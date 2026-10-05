@@ -104,14 +104,14 @@ Frases de abertura ("Bolo de verdade, feito à mão..."), a história da confeit
 
 1. **Preços** — todos os valores estão como **exemplo** em `js/menu-data.js`.
 2. **Depoimentos** — os 6 textos são de exemplo; quero os feedbacks reais (prints do WhatsApp servem).
-3. **Cidade e atendimento** — ajustado para São Gonçalo, com entrega em São Gonçalo e Niterói. Confirme se atende outros bairros/cidades.
+3. ✅ **Cidade e atendimento — confirmado pelo cliente:** São Gonçalo e Niterói **inteiros**, com entrega a combinar (taxa conforme endereço, data e tamanho do pedido).
 4. **Horários** de funcionamento reais (hoje: seg a sex 9h–19h, sáb 9h–17h, dom fechado).
-5. **Bairros que você atende** — coloquei os mais conhecidos de SG e Niterói em `config.bairros`
-   (Centro SG, Alcântara, Neves, Colubandê, Trindade, Mutuá, Zé Garoto, Icaraí, Centro Niterói,
-   São Francisco). Confirme, corrija ou esvazie a lista.
-5.1. **Tabela de tamanhos e preços dos bolos de festa** (`menu-data.js` → `bolosDeFesta.tamanhos`) —
-   hoje aro 15 = até 12 fatias, aro 20 = 16 a 20, aro 25 = 28 a 35, aro 30 = 45 a 55, dois andares = 70+.
-   Preciso dos seus números reais de fatias e preços.
+5. ✅ **Área de entrega — confirmado:** SG e Niterói inteiros, com entrega a combinar. O site mostra
+   isso no cartão "Entrega e retirada" e no bloco "Onde entregamos".
+5.1. ✅ **Feito sob medida — confirmado:** a casa faz bolos de **qualquer tamanho, massa e recheio**,
+   100% do jeito que o cliente preferir. A tabela de tamanhos virou **referência** (não limitação) e o
+   site diz isso na abertura, na seção de bolos de festa, no formulário e no FAQ.
+5.2. ⏳ **Preços** da tabela de referência continuam sendo exemplo — me passe os valores reais.
 6. **Destaque do mês** — hoje está apontando para o Ninho com Morango. Me diga qual produto você quer
    destacar (e o preço) que eu troco.
 5. **Formas de pagamento** e política de sinal.

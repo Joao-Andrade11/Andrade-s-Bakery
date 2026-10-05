@@ -21,7 +21,7 @@ window.CARDAPIO = {
     ativo: true,
     etiqueta: 'Destaque do mês',
     titulo: 'Bolo de festa temático',
-    texto: 'Você manda a referência do tema, a gente desenha como vai ficar e só produz depois da sua aprovação. Massa, recheio e topo escolhidos por você — entrega refrigerada em São Gonçalo e Niterói.',
+    texto: 'Você manda a referência do tema, a gente desenha como vai ficar e só produz depois da sua aprovação. Tamanho, massa, recheio e acabamento do seu jeito — entrega a combinar em São Gonçalo e Niterói.',
     preco: 'a partir de R$ 189,90',
     detalhe: 'Reserve com 5 a 7 dias · temas complexos com 1 mês',
     img: 'assets/img/sazonal-aniversario.jpg',
@@ -34,18 +34,22 @@ window.CARDAPIO = {
   bolosDeFesta: {
     eyebrow: 'Especialidade da casa',
     titulo: 'Bolos de festa para aniversário',
-    chamada: 'Bolo de festa é o que a gente faz de melhor: do desenho no papel até a mesa da sua comemoração. Escolha o tamanho pela quantidade de convidados e conte o tema — o resto é com a gente.',
+    chamada: 'Bolo de festa é o que a gente faz de melhor: do desenho no papel até a mesa da sua comemoração. Fazemos sob medida — qualquer tamanho, qualquer massa, qualquer recheio, do jeito que você preferir. Nós desenhamos, você aprova e a gente produz.',
     etiquetaMarca: 'Fazemos o esboço antes de produzir',
     // Tabela de tamanhos — >>> CONFIRMAR medidas, fatias e preços
+    // Referência de tamanhos — fazemos qualquer tamanho, a tabela é só um guia
+    tamanhosTitulo: 'Referência de tamanho (fazemos qualquer um)',
     tamanhos: [
       { aro: 'Aro 15 cm', fatias: 'até 12 fatias', preco: 'a partir de R$ 129,90' },
       { aro: 'Aro 20 cm', fatias: '16 a 20 fatias', preco: 'a partir de R$ 189,90' },
       { aro: 'Aro 25 cm', fatias: '28 a 35 fatias', preco: 'a partir de R$ 269,90' },
       { aro: 'Aro 30 cm', fatias: '45 a 55 fatias', preco: 'a partir de R$ 359,90' },
-      { aro: 'Dois andares', fatias: '70 fatias ou mais', preco: 'orçamento no WhatsApp' }
+      { aro: 'Dois andares', fatias: '70 fatias ou mais', preco: 'orçamento no WhatsApp' },
+      { aro: 'Outro tamanho', fatias: 'você escolhe — nós fazemos', preco: 'orçamento no WhatsApp' }
     ],
     // O que vai incluso em todo bolo de festa (lista com marcadores)
     incluso: [
+      { titulo: 'Sob medida de verdade', texto: 'Qualquer tamanho, qualquer massa, qualquer recheio. Você diz o que quer e a gente faz exatamente assim.' },
       { titulo: 'Esboço antes da produção', texto: 'Mandamos o desenho de como o bolo vai ficar. Só produzimos depois do seu "aprovado".' },
       { titulo: 'Massa e recheio à escolha', texto: 'Pão de ló, chocolate, cenoura ou red velvet, com os recheios que você preferir.' },
       { titulo: 'Topo e aplicações do tema', texto: 'Personagem, número da idade, flores, papel de arroz, laço — combinado no orçamento.' },
@@ -392,8 +396,12 @@ window.CARDAPIO = {
       a: 'Bolos de festa pedem 5 a 7 dias de antecedência. Temas com personagem, escultura ou dois andares precisam de 1 mês, porque envolvem esboço, aprovação e estrutura. Datas de fim de semana e véspera de feriado fecham primeiro — se a data é importante, reserve assim que decidir.'
     },
     {
+      q: 'Vocês fazem bolo de qualquer tamanho, massa e recheio?',
+      a: 'Sim — é assim que trabalhamos. Fazemos sob medida: qualquer tamanho (inclusive fora da tabela), qualquer massa e qualquer recheio, do jeito que você preferir. Basta dizer o que quer no WhatsApp. Se você tiver alguma referência (uma foto, um sabor de outra confeitaria, a receita da sua família), manda que a gente reproduz.'
+    },
+    {
       q: 'Qual tamanho de bolo para a minha quantidade de convidados?',
-      a: 'Aro 15 serve até 12 fatias · aro 20, de 16 a 20 fatias · aro 25, de 28 a 35 · aro 30, de 45 a 55 · dois andares, 70 ou mais. Se preferir, me diga o número de convidados no WhatsApp que eu indico o tamanho certo — sem cobrar a mais por isso.'
+      a: 'Como referência: aro 15 serve até 12 fatias · aro 20, de 16 a 20 fatias · aro 25, de 28 a 35 · aro 30, de 45 a 55 · dois andares, 70 ou mais. Mas a tabela é só um guia — fazemos o tamanho que você precisar. Diga o número de convidados no WhatsApp que a gente indica o tamanho certo, sem cobrar a mais por isso.'
     },
     {
       q: 'Como funciona o bolo personalizado com tema?',
@@ -401,7 +409,7 @@ window.CARDAPIO = {
     },
     {
       q: 'Vocês entregam? Até onde?',
-      a: 'Entregamos em São Gonçalo e Niterói, com a taxa combinada no WhatsApp conforme o endereço e a data. Bolos de festa viajam refrigerados e montados. A retirada no local também é possível, no horário combinado.'
+      a: 'Atendemos São Gonçalo e Niterói inteiros. A taxa e o horário da entrega são combinados no WhatsApp conforme o endereço, a data e o tamanho do pedido. Bolos de festa viajam refrigerados e montados. A retirada no local também é possível, no horário combinado.'
     },
     {
       q: 'Como funciona o pagamento e a reserva da data?',

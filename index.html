@@ -235,8 +235,8 @@
       <h1 class="h-xl">O bolo que a festa <em>inteira</em> lembra depois.</h1>
       <p class="hero__sub">
         Somos especialistas em <strong>bolos de festa para aniversário</strong>: você conta o tema,
-        a gente desenha como vai ficar e só produz depois do seu "aprovado". Massa, recheio e
-        acabamento feitos à mão no dia da entrega — sem mistura pronta.
+        a gente desenha como vai ficar e só produz depois do seu "aprovado".
+        <span id="heroSobMedida">Qualquer tamanho, massa e recheio — o bolo do jeito que você preferir.</span>
       </p>
 
       <div class="hero__acoes">
@@ -318,7 +318,7 @@
 
     <div class="festa__grade">
       <div class="festa__tabela" data-rev>
-        <h3 class="festa__subtitulo">Escolha pelo número de convidados</h3>
+        <h3 class="festa__subtitulo" id="festaTamanhosTitulo">Referência de tamanho (fazemos qualquer um)</h3>
         <ul class="lista-precos lista-precos--clara" id="festaTamanhos"></ul>
         <p class="festa__nota">Não sabe qual tamanho? Diga quantos convidados você espera que a gente indica — sem cobrar a mais por isso.</p>
       </div>
@@ -417,8 +417,9 @@
     </div>
     <div class="videos__grade" id="gradeVideos" data-rev></div>
     <p class="produto__desc" style="margin-top:1.25rem">
-      Espaço reservado para os vídeos da confeitaria: basta salvar o arquivo em
-      <code>assets/video/</code> e apontar o nome dele em <code>js/menu-data.js</code>.
+      O espaço dos vídeos já está montado: cada card aceita um arquivo <code>.mp4</code> (toca aqui
+      mesmo, em tela cheia) ou o link de um reel do Instagram. Assim que você mandar os vídeos das
+      fornadas e dos bolos, eles entram no lugar dos cards de exemplo.
     </p>
   </div>
 </section>
@@ -602,7 +603,7 @@
             <span>
               <b>Entrega e retirada</b>
               <strong id="contatoEntrega">—</strong>
-              <p id="contatoEntregaDetalhe">Taxa de entrega combinada no WhatsApp conforme o endereço.</p>
+              <p id="contatoEntregaDetalhe">Atendemos as duas cidades inteiras, com entrega a combinar.</p>
             </span>
           </div>
 
@@ -626,7 +627,7 @@
         </div>
 
         <div class="bairros" id="bairrosBloco" hidden>
-          <b>Bairros que atendemos</b>
+          <b id="bairrosTitulo">Onde entregamos</b>
           <div class="bairros__lista" id="bairrosLista"></div>
         </div>
       </div>
@@ -700,6 +701,7 @@
                 <option>Aro 25 cm — 28 a 35 fatias</option>
                 <option>Aro 30 cm — 45 a 55 fatias</option>
                 <option>Dois andares — 70 fatias ou mais</option>
+                <option>Outro tamanho — combino no WhatsApp</option>
               </select>
             </div>
             <div class="campo">

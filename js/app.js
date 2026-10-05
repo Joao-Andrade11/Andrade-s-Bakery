@@ -171,6 +171,10 @@
     var drHor = $('#drawerHorario');
     if (drHor) drHor.textContent = statusAgora().texto;
 
+    // Frase de personalização (a casa faz qualquer tamanho, massa e recheio)
+    var sob = $('#heroSobMedida');
+    if (sob && CFG.sobMedida) sob.textContent = CFG.sobMedida;
+
     // Faixa animada
     var itens = [
       'Bolos por encomenda', 'Doces finos', 'Salgados assados', 'Pão de queijo mineiro',
@@ -873,7 +877,10 @@
     var et = $('#festaEtiqueta');
     if (et && f.etiquetaMarca) { et.textContent = f.etiquetaMarca; et.hidden = false; }
 
-    // Tabela de tamanhos por número de convidados
+    // Tabela de tamanhos (referência — fazemos qualquer tamanho)
+    var tituloTam = $('#festaTamanhosTitulo');
+    if (tituloTam && f.tamanhosTitulo) tituloTam.textContent = f.tamanhosTitulo;
+
     var tamanhos = $('#festaTamanhos');
     if (tamanhos && f.tamanhos) {
       tamanhos.innerHTML = f.tamanhos.map(function (t) {
@@ -940,14 +947,17 @@
   }
 
   /* ======================================================================
-     BAIRROS ATENDIDOS  (js/config.js → `bairros`)
+     ONDE ENTREGAMOS  (js/config.js → `atendimento`)
      ====================================================================== */
-  function renderBairros() {
+  function renderAtendimento() {
     var bloco = $('#bairrosBloco');
     var lista = $('#bairrosLista');
-    var bairros = CFG.bairros || [];
-    if (!bloco || !lista || !bairros.length) return;
-    lista.innerHTML = bairros.map(function (b) { return '<span>' + attr(b) + '</span>'; }).join('');
+    var titulo = $('#bairrosTitulo');
+    var a = CFG.atendimento;
+    if (!bloco || !lista || !a || !a.itens || !a.itens.length) return;
+
+    if (titulo) titulo.textContent = a.titulo || 'Onde entregamos';
+    lista.innerHTML = a.itens.map(function (i) { return '<span>' + attr(i) + '</span>'; }).join('');
     bloco.hidden = false;
   }
 
@@ -976,7 +986,7 @@
     renderBolosDeFesta();
     renderDestaque();
     renderInstagram();
-    renderBairros();
+    renderAtendimento();
     iniciarLista();
     renderStatus();
     renderDepoimentos();

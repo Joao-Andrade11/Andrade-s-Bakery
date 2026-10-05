@@ -14,6 +14,12 @@ window.ANDRADES = {
   uf: 'RJ',
   slogan: 'Feito à mão, com o tempo que o doce pede.',
 
+  /* ---- Feito sob medida -----------------------------------------------
+     A casa faz bolos 100% personalizados: qualquer tamanho, massa e recheio.
+     Este texto aparece na abertura e nas seções de bolo.
+     --------------------------------------------------------------------- */
+  sobMedida: 'Qualquer tamanho, massa e recheio — o bolo do jeito que você preferir.',
+
   /* ---- Especialidade da casa ------------------------------------------
      É o que aparece na abertura, no formulário e nas perguntas frequentes.
      Hoje: bolos de festa para aniversário.
@@ -21,17 +27,22 @@ window.ANDRADES = {
   especialidade: 'bolos de festa para aniversário',
 
   /* ---- Onde atendemos -------------------------------------------------
-     >>> CONFIRMAR os bairros abaixo (coloquei os mais conhecidos de cada
-     cidade como ponto de partida). Deixe a lista vazia ([]) para o site
-     mostrar só "São Gonçalo e Niterói".
+     Confirmado: São Gonçalo e Niterói INTEIROS, com entrega a combinar.
      --------------------------------------------------------------------- */
   areasAtendidas: ['São Gonçalo', 'Niterói'],
-  bairros: [
-    'Centro · SG', 'Alcântara', 'Neves', 'Colubandê', 'Trindade', 'Mutuá',
-    'Zé Garoto', 'Icaraí · Niterói', 'Centro · Niterói', 'São Francisco · Niterói'
-  ],
   entrega: 'São Gonçalo e Niterói',
-  entregaDetalhe: 'Entregamos em São Gonçalo e Niterói. Retirada no local combinada no WhatsApp.',
+  entregaDetalhe: 'Atendemos as duas cidades inteiras. Taxa e horário combinados no WhatsApp conforme o endereço, a data e o tamanho do pedido.',
+
+  // Bloco "Onde entregamos" na área de contato
+  atendimento: {
+    titulo: 'Onde entregamos',
+    itens: [
+      'São Gonçalo — todas as regiões',
+      'Niterói — todas as regiões',
+      'Taxa combinada no WhatsApp',
+      'Retirada no local'
+    ]
+  },
   pagamentos: ['Pix', 'Dinheiro', 'Cartão de débito', 'Cartão de crédito'],
   // >>> CONFIRMAR: pedimos sinal para reservar a data de bolos de festa?
   sinal: 'Sinal de 50% para reservar a data do bolo de festa (o restante na entrega).',
