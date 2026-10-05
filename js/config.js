@@ -106,7 +106,7 @@ window.ANDRADES = {
   prazo: {
     comum: '48 horas para bolos simples e doces',
     dataComemorativa: '5 a 7 dias para bolos de festa e datas comemorativas',
-    // Bolos temáticos complexos (personagem, escultura, dois andares)
+    // Bolos temáticos complexos (personagem, escultura, muita aplicação)
     tematico: '1 mês de antecedência'
   },
 

@@ -25,7 +25,7 @@ Sem framework, sem build, sem dependência externa: é só abrir o `index.html`.
 | **Sobre** | História da confeitaria, três diferenciais, assinatura à mão e o processo em 4 passos |
 | **Dúvidas** | Acordeão com 5 perguntas frequentes |
 | **Encomenda** | Formulário que monta a mensagem do WhatsApp (nome, item, data, quantidade, sabor, observações), cartões de contato, horário, entrega, pagamento e Instagram |
-| **Bolos de festa** | Seção da especialidade da casa: tabela de tamanhos por número de convidados (aro 15 a dois andares), o que vem incluso em todo bolo (esboço antes de produzir, massa e recheio à escolha, topo do tema, mensagem à mão, entrega refrigerada), galeria de bolos entregues e as regras de prazo |
+| **Bolos de festa** | Seção da especialidade da casa: tabela de tamanhos por número de convidados (aro 15 a 30, e outros tamanhos sob medida), o que vem incluso em todo bolo (esboço antes de produzir, massa e recheio à escolha, topo do tema, mensagem à mão, entrega refrigerada), galeria de bolos entregues e as regras de prazo |
 | **Destaque do mês** | Faixa logo depois da abertura com o produto que você quer vender agora (foto, preço, prazo e botão de reserva). Troca num arquivo só; desliga com `ativo: false` |
 | **Status ao vivo** | Selo no cabeçalho calculado pelo horário real: **"Aberto agora · fecha às 19h"** ou **"Fechado agora · abre segunda às 9h"** — muda sozinho, sem você mexer |
 | **Vitrine do Instagram** | 6 fotos que levam ao seu perfil (`@andrades.bakery`) — prova visual de que a produção acontece todo dia |

@@ -416,7 +416,7 @@ window.CARDAPIO = {
     { texto: 'Fecharam comigo o bolo, 100 salgados e 100 doces na mesma entrega. Foi a primeira festa que eu não me preocupei com comida.', nome: 'Aline C.', origem: 'Kit festa · Alcântara', nota: 5 },
     { texto: 'Encomendei em cima da hora, um dia antes, e mesmo assim me responderam rápido e conseguiram encaixar. Salvaram meu domingo.', nome: 'Vitor P.', origem: 'Bolo aro 20 · Niterói', nota: 5 },
     { texto: 'Fiz a cesta de Páscoa pro meu afilhado e o ovo vinha com o nome dele escrito à mão. Ele guardou a embalagem!', nome: 'Simone A.', origem: 'Páscoa · São Gonçalo', nota: 5 },
-    { texto: 'O bolo de dois andares chegou perfeito depois de 40 minutos de carro. Estrutura firme, sem nenhum amassado.', nome: 'Marcos V.', origem: 'Dois andares · Niterói', nota: 5 }
+    { texto: 'O bolo viajou 40 minutos até Niterói e chegou inteiro, montado e ainda gelado. Deu pra ver o cuidado na embalagem.', nome: 'Marcos V.', origem: 'Bolo de festa · Niterói', nota: 5 }
   ],
 
   /* ======================================================================
